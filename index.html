@@ -24,12 +24,12 @@
 @font-face { font-family: "Cookie"; font-weight: 400; font-display: swap; src: url(fuentes/cookie-400.woff2) format("woff2"); }
 
 :root {
-  --primario: #1B2A4A;
-  --primario-oscuro: #0F1B33;
-  --acento: #EF6635;
-  --acento-letra: #FFC857;
-  --crema: #F7F0E8;
-  --titulo-color: #1B2A4A;
+  --primario: #3B1F5C;
+  --primario-oscuro: #26123D;
+  --acento: #FF6B5B;
+  --acento-letra: #FFD166;
+  --crema: #F8F2EC;
+  --titulo-color: #3B1F5C;
   --verde-btn: #47cb59;
   --verde-precio: #0b9b00;
   --verde-precio-2: #00bd39;
@@ -39,7 +39,7 @@
   --rojo-faq: #e02b20;
   --pildora-1: #8300e9;
   --pildora-2: #ff0067;
-  --borde-completo: #768afc;
+  --borde-completo: #B98CF0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,7 +67,7 @@ figure.img.vacia figcaption { display: block; font: 600 12px/1.35 "Poppins", Ari
 /* ── HERO ─────────────────────────────────────────────────────────── */
 .hero { background: var(--primario); padding: 4px 0 0; overflow: hidden; }
 .hero .col { position: relative; z-index: 2; padding-top: 22px; }
-.insignia { display: table; margin: 0 auto 14px; font-size: 12px; font-weight: 700; letter-spacing: .02em; color: var(--acento-letra); border: 1px solid rgba(255,200,87,.55); border-radius: 30px; padding: 4px 12px; text-align: center; }
+.insignia { display: table; margin: 0 auto 14px; font-size: 12px; font-weight: 700; letter-spacing: .02em; color: var(--acento-letra); border: 1px solid rgba(255,209,102,.55); border-radius: 30px; padding: 4px 12px; text-align: center; }
 .hero-titulo { font-size: 24px; font-weight: 700; line-height: 1.2; color: #fff; text-align: center; margin-bottom: 16px; }
 .hero-titulo .manuscrita { font-family: "Cookie", cursive; font-weight: 400; font-size: 42px; line-height: .8; color: var(--acento-letra); }
 .hero-titulo .emocion { display: block; margin-top: 8px; color: var(--acento-letra); }
@@ -109,21 +109,21 @@ figure.img.vacia figcaption { display: block; font: 600 12px/1.35 "Poppins", Ari
 /* ── ESCUCHA LA DIFERENCIA (nuevo) ────────────────────────────────── */
 .escucha { background: var(--primario); color: #fff; border-radius: 12px; padding: 16px 14px 14px; margin: 0 auto 24px; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
 .escucha-tit { font-size: 17px; font-weight: 700; line-height: 1.25; text-align: center; margin-bottom: 4px; }
-.escucha-sub { font-size: 12px; font-weight: 400; text-align: center; color: #d7deea; margin-bottom: 12px; }
+.escucha-sub { font-size: 12px; font-weight: 400; text-align: center; color: #E6DCF2; margin-bottom: 12px; }
 .escucha-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .btn-escucha { display: flex; flex-direction: column; align-items: center; gap: 2px; font-family: inherit; color: #fff; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.35); border-radius: 10px; padding: 10px 6px 9px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .btn-escucha .ico { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fff; color: var(--primario); font-size: 14px; margin-bottom: 4px; }
 .btn-escucha .nom { font-size: 15px; font-weight: 700; line-height: 1.2; }
-.btn-escucha .det { font-size: 11px; font-weight: 400; line-height: 1.25; color: #d7deea; }
+.btn-escucha .det { font-size: 11px; font-weight: 400; line-height: 1.25; color: #E6DCF2; }
 .btn-escucha.orquesta { border-color: var(--acento-letra); }
 .btn-escucha.orquesta .ico { background: var(--acento-letra); }
 .btn-escucha.sonando { background: rgba(255,255,255,.18); border-color: #fff; }
-.btn-escucha.orquesta.sonando { background: rgba(255,200,87,.2); border-color: var(--acento-letra); }
+.btn-escucha.orquesta.sonando { background: rgba(255,209,102,.2); border-color: var(--acento-letra); }
 .btn-escucha.cargando .ico { animation: latido 1s ease-in-out infinite; }
 @keyframes latido { 50% { opacity: .4; } }
 .escucha-barra { height: 4px; background: rgba(255,255,255,.2); border-radius: 2px; margin-top: 12px; overflow: hidden; }
 .escucha-barra i { display: block; height: 100%; width: 0; background: var(--acento-letra); }
-.escucha-pista { font-size: 12px; font-weight: 400; text-align: center; color: #d7deea; margin-top: 8px; min-height: 1.3em; }
+.escucha-pista { font-size: 12px; font-weight: 400; text-align: center; color: #E6DCF2; margin-top: 8px; min-height: 1.3em; }
 
 /* ── 5 VELOCIDADES (de la lander vieja) ───────────────────────────── */
 .velocidades { margin-bottom: 30px; }
@@ -152,7 +152,7 @@ figure.img.vacia figcaption { display: block; font: 600 12px/1.35 "Poppins", Ari
 .tour { display: grid; gap: 18px; margin-bottom: 30px; }
 .video-vertical { position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 9/16; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
 .video-vertical video { width: 100%; height: 100%; display: block; object-fit: cover; }
-.btn-play-tour { position: absolute; inset: 0; margin: auto; width: 78px; height: 78px; border-radius: 50%; border: 0; background: var(--acento); box-shadow: 0 0 0 8px rgba(239,102,53,.3); cursor: pointer; }
+.btn-play-tour { position: absolute; inset: 0; margin: auto; width: 78px; height: 78px; border-radius: 50%; border: 0; background: var(--acento); box-shadow: 0 0 0 8px rgba(255,107,91,.3); cursor: pointer; }
 .btn-play-tour::before { content: ""; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 15px 0 15px 24px; border-color: transparent transparent transparent #fff; }
 .btn-play-tour.cargando { animation: latido 1s ease-in-out infinite; }
 .btn-play-tour[hidden] { display: none; }
@@ -260,17 +260,17 @@ figure.img.vacia figcaption { display: block; font: 600 12px/1.35 "Poppins", Ari
 .cierre-bio { font-size: 15px; line-height: 1.58; margin-bottom: 30px; }
 .cierre-bio p + p { margin-top: 10px; }
 .cierre-bio .firma { color: var(--acento-letra); font-weight: 700; }
-.cierre .btn-pie { color: #d7deea; }
+.cierre .btn-pie { color: #E6DCF2; }
 .pie { font-size: 14px; text-align: center; line-height: 1.6; }
 .pie-legal { margin-top: 10px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .pie-legal button { background: none; border: 0; color: #fff; opacity: .75; font: 400 12px "Poppins", Arial, sans-serif; text-decoration: underline; cursor: pointer; }
 
 /* ── BARRA FIJA (de la lander vieja) ──────────────────────────────── */
-.barra-fija { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; background: rgba(15,27,51,.97); border-top: 2px solid var(--acento-letra); padding: 9px 0 calc(9px + env(safe-area-inset-bottom)); transform: translateY(120%); transition: transform .3s ease; }
+.barra-fija { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; background: rgba(38,18,61,.97); border-top: 2px solid var(--acento-letra); padding: 9px 0 calc(9px + env(safe-area-inset-bottom)); transform: translateY(120%); transition: transform .3s ease; }
 .barra-fija.visible { transform: translateY(0); }
 .barra-fija .col { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 92%; }
 .barra-txt { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.25; }
-.barra-txt .sub { display: block; font-size: 11px; font-weight: 400; color: #c9d2e0; }
+.barra-txt .sub { display: block; font-size: 11px; font-weight: 400; color: #D9CBEA; }
 .barra-fija .btn { font-size: 15px; padding: 8px 16px; box-shadow: none; flex-shrink: 0; }
 
 /* ── Modales legales ──────────────────────────────────────────────── */
@@ -314,11 +314,11 @@ fbq('track','ViewContent',{content_name:'Partituras orquestadas flauta dulce',
 <section class="sec hero" id="hero">
   <div class="col">
     <p class="insignia">✦ Para tu clase, ensayo o presentación</p>
-    <h1 class="hero-titulo">Partituras <span class="manuscrita">Orquestadas</span> tipo karaoke para Flauta Dulce. <span class="emocion">El día que tus alumnos se emocionan tocando.</span></h1>
+    <h1 class="hero-titulo">¿Tu clase de Flauta Dulce suena <span class="manuscrita">delgadita</span>? <span class="emocion">Ponle una orquesta detrás, con partituras tipo karaoke.</span></h1>
     <p class="hero-sub">Cada obra trae su propia <strong>orquesta de 15 instrumentos</strong>, que arranca en cuanto tu alumno sopla la primera nota. Tu clase deja de sonar a flauta sola, empieza a sonar a música… <strong>y te piden tocarla otra vez.</strong></p>
     <figure class="img" style="--ar:3/2"><img src="imagenes/opt/hero-nuevo-1024.572594a5.webp" srcset="imagenes/opt/hero-nuevo-400.979e5c8c.webp 400w, imagenes/opt/hero-nuevo-600.1027a990.webp 600w, imagenes/opt/hero-nuevo-800.36a50337.webp 800w, imagenes/opt/hero-nuevo-1024.572594a5.webp 1024w" sizes="(min-width: 1350px) 1080px, 80vw" width="1024" height="683" style="max-width:1024px" alt="Niños emocionados tocando flauta dulce con la orquesta de Dolce 365 mientras su maestro los dirige" fetchpriority="high" decoding="async"><figcaption>HERO</figcaption></figure>
   </div>
-  <div class="onda-abajo" aria-hidden="true"><svg viewBox="0 0 1280 140" preserveAspectRatio="none"><path fill="#F7F0E8" d="M320 28c320 0 320 84 640 84 160 0 240-21 320-42v70H0V70c80-21 160-42 320-42z"/></svg></div>
+  <div class="onda-abajo" aria-hidden="true"><svg viewBox="0 0 1280 140" preserveAspectRatio="none"><path fill="#F8F2EC" d="M320 28c320 0 320 84 640 84 160 0 240-21 320-42v70H0V70c80-21 160-42 320-42z"/></svg></div>
 </section>
 
 <section class="sec cuerpo">
