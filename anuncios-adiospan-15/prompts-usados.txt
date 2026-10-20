@@ -1,0 +1,37 @@
+Imágenes generadas con el API de OpenAI · modelo gpt-image-2.5-sunburst · 1024×1280 · calidad media.
+Textos superpuestos después con las fuentes de la landing (Poppins y Cookie), a 1080×1350.
+Los anuncios 03, 04, 07 y 12 se armaron solo con fotos y capturas reales de la app (sin imagen nueva).
+
+── D1-carta ──
+Vertical 4:5 overhead photograph of a rustic wooden kitchen table in soft morning light. In the center-left, occupying about 60% of the frame, a single sheet of cream-colored letter paper, completely BLANK with no writing at all, slightly tilted, with a fountain pen resting next to it. In the top-right corner, a lonely slice of plain white bread on a small white plate, and a cup of black coffee. A few scattered crumbs. Nostalgic, intimate, cinematic mood, warm tones. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D2-ochenta ──
+Vertical 4:5 overhead food art photograph on a smooth cream background (#FBF6EA): two very large numerals, an eight and a zero, side by side in the upper-middle of the image, each formed ENTIRELY by carefully arranging small breakfast foods: strawberries, banana slices, blueberries, mango cubes, kiwi slices, rolled oats, cherry tomatoes, avocado slices, quail eggs and spinach leaves. Clean, playful, high-end food styling, crisp soft shadows. The bottom 28% of the image is empty plain cream background. The numerals must be made only of food, no ink. No people, no hands. No letters, no words, no logos, no watermarks.
+
+── D5-reloj ──
+Vertical 4:5 moody advertising photograph: a retro egg-yolk-yellow mechanical kitchen timer (round dial, simple tick marks only, no printed numbers) sits next to a black cast-iron skillet with a perfectly cooked fluffy omelette with spinach, tomato and cheese, steam rising. Dark deep-green background (#1E3F28), dramatic warm side light. Objects in the lower 60% of the frame; the top 35% is calm dark green, empty, for a headline. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D6-nevera ──
+Vertical 4:5 photograph, front view of an open refrigerator in a dark kitchen early in the morning, the fridge light glowing warm and inviting. Shelves neatly stocked with: a carton of eggs, jars of yogurt, strawberries, bananas, mango, spinach, cheese, milk bottle, a glass jar of rolled oats, avocados. No bread anywhere. Magical, hopeful mood, the fridge light illuminating the scene. The top 22% of the frame is dark kitchen wall, calm, for a headline. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D8-mitad ──
+Vertical 4:5 overhead photograph: a single large round white ceramic plate on a light wooden table, the plate contents split perfectly in half by a straight diagonal line: the LEFT half holds two dull slices of plain white bread with butter, grey and boring; the RIGHT half holds a vibrant colorful breakfast: fluffy scrambled eggs with herbs, avocado slices, cherry tomatoes, oat pancakes with strawberries and blueberries. A cup of coffee at the edge. Plate centered in the middle 60% of the frame, top 20% and bottom 20% calm empty wood. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D9-lonchera ──
+Vertical 4:5 bright photograph of a colorful open kids' lunchbox (bento style, green and yellow) on a school wooden desk next to a small backpack, colored pencils and a notebook with a blank cover: compartments with fruit skewers (strawberry, pineapple, grape), mini egg muffins with vegetables, carrot and cucumber sticks, cheese cubes, a small yogurt cup. No bread, no sandwiches. Cheerful morning light, playful and appetizing. Keep the top 25% calm (blurred classroom wall) for a headline. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D10-congelador ──
+Vertical 4:5 photograph, front view of an open freezer drawer full of neatly stacked glass meal-prep containers with frozen colorful home-cooked meals: chicken stew, rice with vegetables, lentil stew, beef stew, pumpkin soup, meatballs in tomato sauce, each container with a BLANK kraft paper label with no writing. Frosty air, cool blue freezer light mixed with warm kitchen light. Organized and satisfying. Keep the top 22% calm for a headline. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D11-pizarra ──
+Vertical 4:5 photograph of a cozy home kitchen: a large BLANK black chalkboard (completely empty, clean, no chalk marks at all) in a wooden frame hangs on a white tiled wall, occupying the upper 55% of the image, centered. Below it, on a wooden counter, a few beautiful breakfast dishes: oat pancakes with berries, a bowl of fruit, eggs, a green smoothie, a coffee cup, a small plant. Warm morning light. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D13-tostadora ──
+Vertical 4:5 humorous photorealistic photograph: an old chrome toaster on a kitchen counter covered in dust and cobwebs, clearly abandoned for weeks, with a tiny green plant sprouting from one of its bread slots. Around and in front of it, fresh, colorful bread-free breakfasts glowing in bright morning sunlight: a bowl of oatmeal with banana, an omelette, a mango yogurt parfait, a green smoothie. Contrast between the dusty forgotten toaster and the vibrant food. Keep the top 25% calm for a headline. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D14-mercado ──
+Vertical 4:5 overhead photograph of a kitchen counter with fresh groceries just unpacked from a woven market bag: a carton of eggs, a bag of rolled oats, bananas, strawberries, a mango, avocados, a tub of yogurt, spinach, tomatoes, a block of white cheese, milk. The groceries are arranged around the edges of the frame, leaving a large EMPTY area in the center-left (about 50% wide and 70% tall) of plain light wooden counter. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
+── D15-familia ──
+Vertical 4:5 overhead photograph of a large wooden table set for a weekend family breakfast for four, with no people: four colorful placemats, plates with oat pancakes and berries, scrambled eggs, a big fruit platter, a jug of orange juice, two small colorful kids' cups, a bowl of yogurt with granola, coffee mugs, napkins, a vase with yellow flowers. Abundant, happy, warm sunny weekend light, Latin American ceramics with yellow and green patterns. No bread. Keep the bottom 22% calmer for text. No people, no faces, no hands. Absolutely no text, no letters, no numbers, no words, no logos, no labels, no watermarks.
+
