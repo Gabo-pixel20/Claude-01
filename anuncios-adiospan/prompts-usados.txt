@@ -1,0 +1,13 @@
+Imágenes generadas con el API de OpenAI · modelo gpt-image-2.5-sunburst · calidad media.
+Textos superpuestos después con las fuentes de la landing (Poppins y Cookie), a 1080×1350.
+En el anuncio B, la foto «MAÑANA» es la de los panqueques de avena de la app; en el C, el celular muestra una captura real de la app.
+
+── A-pan-se-va ──
+Vertical 4:5 whimsical photorealistic food photograph with a playful surreal twist: on a bright breakfast table, a single slice of plain white sandwich bread has tiny cartoon-like legs and is walking away off the edge of the table, carrying a tiny brown suitcase, seen from behind at a three-quarter angle, as if leaving forever. Behind it, the table is full of colorful bread-free breakfasts: a fluffy omelette with spinach and tomatoes, a bowl of oatmeal with banana slices, oat pancakes with strawberries, a mango yogurt parfait, avocado halves, a green smoothie and a cup of coffee, in Latin American hand-painted ceramic dishes with yellow and green patterns. Warm morning sunlight. Keep the top 24% of the image a calm, darker deep-green (#1E3F28) wall with no important details, for a headline, and the bottom 12% calm too. Shallow depth of field, high-end advertising photography. The walking bread slice is the clear focal point, in the lower-middle area. No people, no hands. No text, no letters, no numbers, no logos, no watermarks.
+
+── B-pan-con-cafe ──
+Square overhead photograph of a dull, ordinary weekday breakfast: two slices of plain white bread with a little butter on a simple white plate, next to a mug of black coffee, on a plain grey kitchen table. Flat, slightly cold and grey morning light, boring and monotonous mood, desaturated colors. Centered composition, simple. No people, no hands. No text, no letters, no logos, no watermarks.
+
+── C-ingredientes-volando ──
+Vertical 4:5 dynamic advertising photograph on a deep green (#1E3F28) background: fresh breakfast ingredients exploding outward and flying in mid-air in a circular burst, like a slot machine or a roulette spinning: eggs, cracked egg yolk, strawberries, banana slices, avocado halves, blueberries, oats, mango cubes, spinach leaves, cherry tomatoes, a little honey splash. The CENTER of the image (a vertical rectangle about 45% wide and 60% tall) must be EMPTY plain green background, for placing a phone later. Keep the top 18% calmer for a headline. Studio lighting, crisp, energetic, high-end food advertising. No bread, no toast. No phone, no people, no hands. No text, no letters, no logos, no watermarks.
+
