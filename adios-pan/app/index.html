@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2E5A3A">
+<title>Adiós Pan</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="icono-192.png">
+<link rel="preload" href="../fuentes/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Poppins"; font-weight: 400; font-display: swap; src: url(../fuentes/poppins-400.woff2) format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url(../fuentes/poppins-500.woff2) format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 700; font-display: swap; src: url(../fuentes/poppins-700.woff2) format("woff2"); }
+@font-face { font-family: "Cookie"; font-weight: 400; font-display: swap; src: url(../fuentes/cookie-400.woff2) format("woff2"); }
+
+:root {
+  --verde: #2E5A3A; --verde-oscuro: #1E3F28; --verde-claro: #A8D18D; --yema: #FFD25A; --naranja: #E8890C;
+  --crema: #FBF6EA; --tinta: #1d2b20; --gris: #6b6f69; --borde: #e4e9df; --blanco: #fff;
+  --t-dulce: #2FA866; --t-salado: #2E86C1; --t-llevar: #7D5BD6; --t-express: #E0752D; --t-finde: #D4A017;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: "Poppins", Arial, sans-serif; font-weight: 500; color: var(--tinta); background: var(--crema); min-height: 100vh; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+input { font: inherit; }
+img { display: block; max-width: 100%; }
+.cur { font-family: "Cookie", cursive; font-weight: 400; }
+.contenedor { max-width: 560px; margin: 0 auto; padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+
+/* Cabecera */
+.cab { background: var(--verde); color: #fff; padding: calc(18px + env(safe-area-inset-top)) 18px 18px; }
+.cab .cur { font-size: 44px; line-height: .9; color: var(--yema); }
+.cab p { font-size: 13px; opacity: .9; margin-top: 4px; }
+.cab .progreso { margin-top: 12px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.2); overflow: hidden; }
+.cab .progreso i { display: block; height: 100%; background: var(--yema); width: 0; transition: width .4s; }
+.cab small { display: block; font-size: 11px; opacity: .85; margin-top: 5px; }
+.volver { display: inline-flex; align-items: center; gap: 4px; color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+
+/* Inicio */
+.sorprendeme { display: flex; align-items: center; justify-content: center; gap: 10px; width: calc(100% - 32px); margin: 16px 16px 6px; padding: 16px; border-radius: 18px; background: var(--yema); color: var(--verde-oscuro); font-weight: 700; font-size: 19px; box-shadow: 0 4px 0 #e2b438; }
+.sorprendeme:active { transform: translateY(3px); box-shadow: 0 1px 0 #e2b438; }
+.buscar { display: block; width: calc(100% - 32px); margin: 10px 16px 0; padding: 11px 14px; border-radius: 12px; border: 2px solid var(--borde); background: #fff; font-size: 15px; }
+.filtros { display: flex; gap: 8px; padding: 12px 16px 6px; overflow-x: auto; scrollbar-width: none; }
+.filtros::-webkit-scrollbar { display: none; }
+.chip { flex: none; padding: 7px 14px; border-radius: 20px; background: #fff; border: 2px solid var(--borde); font-size: 13px; font-weight: 700; }
+.chip.on { background: var(--verde); border-color: var(--verde); color: #fff; }
+.tipo { display: inline-block; color: #fff; font-size: 11px; font-weight: 700; border-radius: 12px; padding: 2px 9px; }
+.t-dulce { background: var(--t-dulce); } .t-salado { background: var(--t-salado); } .t-llevar { background: var(--t-llevar); } .t-express { background: var(--t-express); } .t-finde { background: var(--t-finde); }
+.lista { padding: 8px 16px; display: grid; gap: 10px; }
+.tarjeta { display: flex; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); text-align: left; width: 100%; position: relative; }
+.tarjeta .foto { width: 104px; flex: none; aspect-ratio: 1; background: #eee center/cover; }
+.tarjeta .tx { padding: 10px 12px; min-width: 0; flex: 1; }
+.tarjeta b { display: block; font-size: 15px; line-height: 1.25; margin-bottom: 4px; }
+.tarjeta .meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gris); flex-wrap: wrap; }
+.tarjeta .marca { font-size: 11px; font-weight: 700; color: var(--verde); background: #eef6e8; border-radius: 10px; padding: 2px 8px; }
+.vacio { text-align: center; color: var(--gris); padding: 30px 20px; font-size: 14px; }
+.foto-falta { background: linear-gradient(135deg, #fff3cf, #e6f2dc) !important; }
+
+/* Detalle */
+.det-foto { aspect-ratio: 4/3; background: #eee center/cover; position: relative; }
+.det-foto .volver { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 12px; background: rgba(0,0,0,.45); border-radius: 20px; padding: 6px 12px; }
+.det { padding: 16px; }
+.det h1 { font-size: 24px; line-height: 1.2; margin: 6px 0 8px; }
+.det .meta { display: flex; gap: 10px; align-items: center; color: var(--gris); font-size: 14px; flex-wrap: wrap; }
+.acciones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 13px 10px; border-radius: 14px; font-weight: 700; font-size: 14px; background: #fff; border: 2px solid var(--borde); }
+.btn.prim { background: var(--verde); color: #fff; border-color: var(--verde); grid-column: 1 / -1; font-size: 17px; padding: 15px; }
+.btn.activo { background: #fff6dc; border-color: var(--yema); }
+.btn.hecho { background: #eef6e8; border-color: var(--verde-claro); color: var(--verde); }
+.det h2 { font-size: 17px; margin: 18px 0 10px; display: flex; align-items: center; justify-content: space-between; }
+.porciones { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--gris); }
+.porciones button { width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 2px solid var(--borde); font-size: 18px; line-height: 1; }
+.ing li { list-style: none; display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--borde); font-size: 15px; }
+.ing li input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--verde); flex: none; }
+.ing li.ok span { text-decoration: line-through; color: var(--gris); }
+.pasos li { list-style: none; display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 8px 0; font-size: 15px; line-height: 1.45; }
+.pasos .n { width: 28px; height: 28px; border-radius: 50%; background: var(--naranja); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.pasos small { display: inline-block; margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--naranja); }
+
+/* Modo cocina */
+.cocina { position: fixed; inset: 0; background: var(--verde-oscuro); color: #fff; display: flex; flex-direction: column; padding: calc(16px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom)); z-index: 50; }
+.cocina .arriba { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; opacity: .9; }
+.cocina .barra { height: 6px; border-radius: 3px; background: rgba(255,255,255,.15); margin: 12px 0 0; overflow: hidden; }
+.cocina .barra i { display: block; height: 100%; background: var(--yema); }
+.cocina .paso { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cocina .paso .num { color: var(--yema); font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.cocina .paso p { font-size: 27px; line-height: 1.35; font-weight: 700; }
+.reloj { margin-top: 26px; display: flex; align-items: center; gap: 14px; }
+.reloj b { font-size: 46px; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.reloj button { padding: 12px 18px; border-radius: 14px; background: var(--yema); color: var(--verde-oscuro); font-weight: 700; font-size: 16px; }
+.reloj button.sec { background: rgba(255,255,255,.12); color: #fff; }
+.reloj.fin b { color: var(--yema); animation: latido .8s infinite; }
+@keyframes latido { 50% { opacity: .35; } }
+.cocina .nav { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+.cocina .nav button { padding: 17px; border-radius: 16px; font-weight: 700; font-size: 17px; background: rgba(255,255,255,.12); }
+.cocina .nav button.sig { background: var(--yema); color: var(--verde-oscuro); }
+.cocina .nav button:disabled { opacity: .3; }
+
+/* Semana y compras */
+.sec-tit { padding: 16px 16px 4px; font-size: 18px; }
+.personas { display: flex; align-items: center; justify-content: space-between; margin: 10px 16px; background: #fff; border-radius: 14px; padding: 10px 14px; font-weight: 700; font-size: 14px; }
+.personas .porciones b { font-size: 18px; color: var(--tinta); min-width: 22px; text-align: center; }
+.dia { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px; padding: 8px; margin: 0 16px 8px; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
+.dia .d { width: 46px; text-align: center; font-weight: 700; color: var(--verde); font-size: 14px; flex: none; }
+.dia .foto { width: 56px; height: 56px; border-radius: 10px; background: #eee center/cover; flex: none; }
+.dia .nom { flex: 1; font-size: 14px; font-weight: 700; line-height: 1.25; text-align: left; }
+.dia .nom small { display: block; font-weight: 500; color: var(--gris); font-size: 12px; }
+.dia .x { color: var(--gris); font-size: 20px; padding: 4px 8px; }
+.dia.vacia .nom { color: var(--gris); font-weight: 500; }
+.botonera { display: grid; gap: 10px; padding: 8px 16px; }
+.compras li { list-style: none; display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 12px; padding: 12px 14px; margin: 0 16px 8px; font-size: 15px; }
+.compras li input { width: 22px; height: 22px; accent-color: var(--verde); flex: none; }
+.compras li.ok span { text-decoration: line-through; color: var(--gris); }
+.compras li small { display: block; color: var(--gris); font-size: 12px; }
+
+/* Hoja (Sorpréndeme y elegir día) */
+.fondo { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
+.hoja { background: var(--crema); width: 100%; max-width: 560px; border-radius: 24px 24px 0 0; padding: 18px 18px calc(22px + env(safe-area-inset-bottom)); animation: subir .25s ease; }
+@keyframes subir { from { transform: translateY(40px); opacity: 0; } }
+.hoja h3 { font-size: 18px; margin-bottom: 12px; text-align: center; }
+.hoja .grande { border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.hoja .grande .foto { aspect-ratio: 16/10; background: #eee center/cover; }
+.hoja .grande .tx { padding: 12px 14px; }
+.hoja .grande b { font-size: 19px; display: block; margin-bottom: 6px; line-height: 1.25; }
+.hoja .botones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.hoja .dias { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.hoja .dias button { padding: 12px 4px; border-radius: 12px; background: #fff; border: 2px solid var(--borde); font-weight: 700; font-size: 14px; }
+.hoja .dias button small { display: block; font-weight: 500; font-size: 10px; color: var(--gris); }
+.girando .foto { animation: girar .12s linear infinite; }
+@keyframes girar { 50% { filter: blur(3px) brightness(1.1); } }
+
+/* Navegación inferior */
+.navbar { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--borde); display: flex; justify-content: center; padding-bottom: env(safe-area-inset-bottom); z-index: 30; }
+.navbar .in { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 560px; }
+.navbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 9px 0 8px; color: var(--gris); text-decoration: none; font-size: 11px; font-weight: 700; }
+.navbar a svg { width: 24px; height: 24px; }
+.navbar a.on { color: var(--verde); }
+.aviso { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 60; opacity: 0; transition: opacity .25s; pointer-events: none; white-space: nowrap; }
+.aviso.ver { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="app" class="contenedor"></div>
+<nav class="navbar" id="navbar"><div class="in">
+  <a href="#/" data-ruta="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+  <a href="#/semana" data-ruta="semana"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Mi semana</a>
+  <a href="#/compras" data-ruta="compras"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Compras</a>
+  <a href="#/favoritos" data-ruta="favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>Favoritos</a>
+</div></nav>
+<div class="aviso" id="aviso"></div>
+
+<script src="recetas.js"></script>
+<script>
+(() => {
+  // ════════════════════════════════════════════════════════════════════
+  //  Datos y estado
+  // ════════════════════════════════════════════════════════════════════
+  const RECETAS = window.RECETAS;
+  const POR_ID = Object.fromEntries(RECETAS.map(r => [r.id, r]));
+  const TIPOS = { dulce: "Dulce", salado: "Salado", llevar: "Para llevar", express: "Express", finde: "Fin de semana" };
+  const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  const CLAVE = "adiospan:v1";
+
+  const estado = (() => {
+    const base = { hechos: [], favs: [], semana: {}, personas: 2, compradas: {}, filtro: "todos", ultimoSorpresa: null };
+    try { return Object.assign(base, JSON.parse(localStorage.getItem(CLAVE) || "{}")); } catch (e) { return base; }
+  })();
+  const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) {} };
+
+  const $ = s => document.querySelector(s);
+  const app = $("#app");
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const foto = r => r.foto || r.id;
+  // Si la foto no carga, queda a la vista el degradado de fondo.
+  const fondoFoto = r => `style="background-image:url('fotos/${foto(r)}.webp'),linear-gradient(135deg,#fff3cf,#e6f2dc)"`;
+  const avisar = t => { const a = $("#aviso"); a.textContent = t; a.classList.add("ver"); clearTimeout(avisar.t); avisar.t = setTimeout(() => a.classList.remove("ver"), 1800); };
+  const vibrar = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} };
+
+  // ── Cantidades: fracciones legibles y escala por porciones ─────────
+  const FRAC = { 0.25: "¼", 0.5: "½", 0.75: "¾", 0.33: "⅓", 0.67: "⅔" };
+  function numero(n) {
+    const e = Math.floor(n + 1e-9), f = Math.round((n - e) * 100) / 100;
+    const fr = FRAC[f] || (f ? String(f).slice(1) : "");
+    if (!e) return fr || "0";
+    return fr && FRAC[f] ? e + fr : String(Math.round(n * 10) / 10);
+  }
+  function redondear(n, unidad) {
+    if (unidad === "g" || unidad === "ml") return Math.round(n / 5) * 5 || n;
+    if (unidad === "u") return n < 1 ? Math.round(n * 2) / 2 : Math.round(n * 2) / 2;
+    return Math.round(n * 4) / 4 || n;
+  }
+  const UNIDADES = { taza: ["taza", "tazas"], cda: ["cda", "cdas"], cdta: ["cdta", "cdtas"], g: ["g", "g"], ml: ["ml", "ml"] };
+  // Ingredientes que se cuentan por unidad: [singular, plural].
+  const NOMBRES = {
+    "aguacate (palta)": ["aguacate (palta)", "aguacates (palta)"], "almendras": ["almendra", "almendras"],
+    "calabacín (zucchini)": ["calabacín (zucchini)", "calabacines (zucchini)"], "cebolla": ["cebolla", "cebollas"],
+    "cebolla larga (cebollín)": ["tallo de cebolla larga (cebollín)", "tallos de cebolla larga (cebollín)"],
+    "champiñones": ["champiñón", "champiñones"], "chile jalapeño (opcional)": ["chile jalapeño (opcional)", "chiles jalapeños (opcional)"],
+    "fresas": ["fresa", "fresas"], "fruta de temporada": ["fruta de temporada", "frutas de temporada"], "hojas de menta": ["hoja de menta", "hojas de menta"],
+    "huevos": ["huevo", "huevos"], "lata de atún": ["lata de atún", "latas de atún"], "mango": ["mango", "mangos"], "manzana": ["manzana", "manzanas"],
+    "papaya pequeña": ["papaya pequeña", "papayas pequeñas"], "pimiento": ["pimiento", "pimientos"], "plátano (banana)": ["plátano (banana)", "plátanos (bananas)"],
+    "plátano maduro (para cocinar)": ["plátano maduro (para cocinar)", "plátanos maduros (para cocinar)"],
+    "rebanadas de jamón": ["rebanada de jamón", "rebanadas de jamón"], "rebanadas de queso": ["rebanada de queso", "rebanadas de queso"],
+    "tomate": ["tomate", "tomates"], "tomates cherry": ["tomate cherry", "tomates cherry"], "zanahoria rallada": ["zanahoria rallada", "zanahorias ralladas"],
+  };
+  function texto([cant, unidad, item], factor = 1) {
+    if (cant === null) return `${item[0].toUpperCase() + item.slice(1)} al gusto`;
+    const n = redondear(cant * factor, unidad);
+    if (unidad === "u") { const [s, p] = NOMBRES[item] || [item, item]; return `${numero(n)} ${n > 1 ? p : s}`; }
+    const [s, p] = UNIDADES[unidad] || [unidad, unidad];
+    return `${numero(n)} ${n > 1 ? p : s} de ${item}`;
+  }
+
+  // ════════════════════════════════════════════════════════════════════
+  //  Vistas
+  // ════════════════════════════════════════════════════════════════════
+  function tarjeta(r) {
+    const hecho = estado.hechos.includes(r.id), fav = estado.favs.includes(r.id);
+    return `<a class="tarjeta" href="#/receta/${r.id}">
+      <div class="foto" ${fondoFoto(r)}></div>
+      <div class="tx"><b>${esc(r.nombre)}</b>
+        <div class="meta"><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span><span>⏱ ${r.min} min</span>${fav ? "<span>★</span>" : ""}${hecho ? '<span class="marca">✓ Hecho</span>' : ""}</div></div></a>`;
+  }
+
+  function cabecera(titulo, sub, volver) {
+    const n = estado.hechos.length;
+    return `<header class="cab">${volver ? `<a class="volver" href="${volver}">‹ Volver</a>` : ""}
+      <div class="cur">${titulo}</div><p>${sub}</p>
+      ${volver ? "" : `<div class="progreso"><i style="width:${(100 * n / RECETAS.length).toFixed(1)}%"></i></div><small>${n} de ${RECETAS.length} desayunos probados</small>`}</header>`;
+  }
+
+  function filtradas() {
+    const q = (estado.busqueda || "").trim().toLowerCase();
+    return RECETAS.filter(r => (estado.filtro === "todos" || r.tipo === estado.filtro) &&
+      (!q || r.nombre.toLowerCase().includes(q) || r.ing.some(i => i[2].toLowerCase().includes(q))));
+  }
+
+  function vistaInicio() {
+    const chips = [["todos", "Todos"], ...Object.entries(TIPOS)].map(([k, v]) => `<button class="chip ${estado.filtro === k ? "on" : ""}" data-filtro="${k}">${v}</button>`).join("");
+    const lista = filtradas();
+    app.innerHTML = cabecera("Adiós Pan", "¿Qué desayunamos hoy?") + `
+      <button class="sorprendeme" id="sorprendeme">🎲 Sorpréndeme</button>
+      <input class="buscar" id="buscar" type="search" placeholder="Busca por nombre o ingrediente (huevo, avena…)" value="${esc(estado.busqueda || "")}">
+      <div class="filtros">${chips}</div>
+      <div class="lista" id="lista">${lista.map(tarjeta).join("") || '<p class="vacio">No encontramos desayunos con esa búsqueda.</p>'}</div>`;
+    app.querySelectorAll("[data-filtro]").forEach(b => b.onclick = () => { estado.filtro = b.dataset.filtro; guardar(); vistaInicio(); });
+    $("#buscar").oninput = e => { estado.busqueda = e.target.value; $("#lista").innerHTML = filtradas().map(tarjeta).join("") || '<p class="vacio">No encontramos desayunos con esa búsqueda.</p>'; };
+    $("#sorprendeme").onclick = sorprender;
+  }
+
+  // ── Sorpréndeme: elige sin repetir los que ya hiciste ───────────────
+  function sorprender() {
+    const base = estado.filtro === "todos" ? RECETAS : RECETAS.filter(r => r.tipo === estado.filtro);
+    let opciones = base.filter(r => !estado.hechos.includes(r.id) && r.id !== estado.ultimoSorpresa);
+    let reinicio = false;
+    if (!opciones.length) { opciones = base.filter(r => r.id !== estado.ultimoSorpresa); reinicio = true; }
+    const elegida = opciones[Math.floor(Math.random() * opciones.length)];
+    estado.ultimoSorpresa = elegida.id; guardar();
+    const fondo = document.createElement("div");
+    fondo.className = "fondo";
+    fondo.innerHTML = `<div class="hoja"><h3>${reinicio ? "¡Ya los probaste todos! Empezamos otra vuelta:" : "Hoy te toca…"}</h3>
+      <div class="grande girando"><div class="foto"></div><div class="tx"><b>…</b></div></div>
+      <div class="botones"><button class="btn" id="otra">🎲 Otra</button><button class="btn prim" id="ver" style="grid-column:auto">Ver receta</button></div></div>`;
+    document.body.appendChild(fondo);
+    vibrar(30);
+    const g = fondo.querySelector(".grande");
+    let vueltas = 0;
+    const giro = setInterval(() => {
+      const r = vueltas++ < 7 ? base[Math.floor(Math.random() * base.length)] : elegida;
+      g.querySelector(".foto").style.backgroundImage = `url('fotos/${foto(r)}.webp')`;
+      g.querySelector(".tx").innerHTML = `<b>${esc(r.nombre)}</b><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span> <span style="font-size:13px;color:var(--gris)">⏱ ${r.min} min</span>`;
+      if (vueltas > 7) { clearInterval(giro); g.classList.remove("girando"); vibrar([20, 40, 20]); }
+    }, 110);
+    fondo.onclick = e => { if (e.target === fondo) cerrar(); };
+    const cerrar = () => { clearInterval(giro); fondo.remove(); };
+    fondo.querySelector("#otra").onclick = () => { cerrar(); sorprender(); };
+    fondo.querySelector("#ver").onclick = () => { cerrar(); location.hash = "#/receta/" + elegida.id; };
+  }
+
+  // ── Detalle de receta ───────────────────────────────────────────────
+  function vistaReceta(id) {
+    const r = POR_ID[id]; if (!r) return (location.hash = "#/");
+    const porc = estado.porcionesReceta && estado.porcionesReceta[id] || r.porciones;
+    const factor = porc / r.porciones;
+    const hecho = estado.hechos.includes(id), fav = estado.favs.includes(id);
+    app.innerHTML = `
+      <div class="det-foto" ${fondoFoto(r)}><a class="volver" href="#/">‹ Volver</a></div>
+      <div class="det">
+        <span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span>
+        <h1>${esc(r.nombre)}</h1>
+        <div class="meta"><span>⏱ ${r.min} minutos</span><span>·</span><span>${r.pasos.length} pasos</span></div>
+        <div class="acciones">
+          <button class="btn prim" id="cocinar">▶ Modo cocina</button>
+          <button class="btn ${fav ? "activo" : ""}" id="fav">${fav ? "★ En favoritos" : "☆ Favorito"}</button>
+          <button class="btn" id="semana">📅 A mi semana</button>
+          <button class="btn ${hecho ? "hecho" : ""}" id="hecho" style="grid-column:1/-1">${hecho ? "✓ Ya lo hiciste" : "Marcar como hecho"}</button>
+        </div>
+        <h2>Ingredientes <span class="porciones"><button id="menos">−</button><span>${porc} ${porc > 1 ? "porciones" : "porción"}</span><button id="mas">+</button></span></h2>
+        <ul class="ing">${r.ing.map((i, n) => `<li><input type="checkbox" id="i${n}"><span>${esc(texto(i, factor))}</span></li>`).join("")}</ul>
+        <h2>Preparación</h2>
+        <ol class="pasos">${r.pasos.map((p, n) => `<li><span class="n">${n + 1}</span><div>${esc(p[0])}${p[1] ? `<br><small>⏱ ${reloj(p[1])}</small>` : ""}</div></li>`).join("")}</ol>
+      </div>`;
+    app.querySelectorAll(".ing input").forEach(c => c.onchange = () => c.parentElement.classList.toggle("ok", c.checked));
+    const cambiar = d => { estado.porcionesReceta = estado.porcionesReceta || {}; estado.porcionesReceta[id] = Math.max(1, Math.min(12, porc + d)); guardar(); vistaReceta(id); };
+    $("#menos").onclick = () => cambiar(-1); $("#mas").onclick = () => cambiar(1);
+    $("#cocinar").onclick = () => location.hash = `#/cocina/${id}/0`;
+    $("#fav").onclick = () => { alternar(estado.favs, id); guardar(); avisar(estado.favs.includes(id) ? "Guardado en favoritos" : "Quitado de favoritos"); vistaReceta(id); };
+    $("#hecho").onclick = () => { alternar(estado.hechos, id); guardar(); vistaReceta(id); };
+    $("#semana").onclick = () => elegirDia(id);
+  }
+  const alternar = (arr, v) => { const i = arr.indexOf(v); i < 0 ? arr.push(v) : arr.splice(i, 1); };
+  const reloj = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+  function elegirDia(id) {
+    const fondo = document.createElement("div");
+    fondo.className = "fondo";
+    fondo.innerHTML = `<div class="hoja"><h3>¿Qué día lo preparas?</h3><div class="dias">${DIAS.map((d, n) => {
+      const actual = estado.semana[n] && POR_ID[estado.semana[n]];
+      return `<button data-dia="${n}">${d.slice(0, 3)}<small>${actual ? "ocupado" : "libre"}</small></button>`; }).join("")}</div></div>`;
+    document.body.appendChild(fondo);
+    fondo.onclick = e => { if (e.target === fondo) fondo.remove(); };
+    fondo.querySelectorAll("[data-dia]").forEach(b => b.onclick = () => { estado.semana[b.dataset.dia] = id; guardar(); fondo.remove(); avisar(`Agregado al ${DIAS[b.dataset.dia].toLowerCase()}`); });
+  }
+
+  // ── Modo cocina: paso a paso, temporizador y pantalla encendida ─────
+  let candado = null, intervalo = null;
+  async function mantenerEncendida() { try { if ("wakeLock" in navigator && !candado) { candado = await navigator.wakeLock.request("screen"); candado.addEventListener("release", () => candado = null); } } catch (e) {} }
+  function soltarPantalla() { try { candado && candado.release(); } catch (e) {} candado = null; }
+  function pitar() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, .35, .7].forEach(t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = 880; o.connect(g); g.connect(ctx.destination); g.gain.setValueAtTime(.25, ctx.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + t + .3); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .3); });
+    } catch (e) {}
+    vibrar([300, 150, 300]);
+  }
+
+  function vistaCocina(id, n) {
+    const r = POR_ID[id]; if (!r) return (location.hash = "#/");
+    n = Math.max(0, Math.min(r.pasos.length - 1, +n || 0));
+    clearInterval(intervalo);
+    mantenerEncendida();
+    const [txt, seg] = r.pasos[n], ultimo = n === r.pasos.length - 1;
+    app.innerHTML = `<div class="cocina">
+      <div class="arriba"><a class="volver" href="#/receta/${id}" style="margin:0">✕ Salir</a><span>${esc(r.nombre)}</span></div>
+      <div class="barra"><i style="width:${(100 * (n + 1) / r.pasos.length).toFixed(0)}%"></i></div>
+      <div class="paso"><div class="num">Paso ${n + 1} de ${r.pasos.length}</div><p>${esc(txt)}</p>
+        ${seg ? `<div class="reloj" id="reloj"><b id="tiempo">${reloj(seg)}</b><button id="iniciar">Iniciar</button><button class="sec" id="reiniciar">↺</button></div>` : ""}</div>
+      <div class="nav"><button id="ant" ${n ? "" : "disabled"}>‹ Atrás</button><button class="sig" id="sig">${ultimo ? "✓ ¡Listo!" : "Siguiente ›"}</button></div></div>`;
+    $("#ant").onclick = () => location.hash = `#/cocina/${id}/${n - 1}`;
+    $("#sig").onclick = () => {
+      if (!ultimo) return (location.hash = `#/cocina/${id}/${n + 1}`);
+      if (!estado.hechos.includes(id)) estado.hechos.push(id);
+      guardar(); soltarPantalla(); avisar("¡Buen provecho! Marcado como hecho"); location.hash = "#/";
+    };
+    if (seg) {
+      let quedan = seg, corriendo = false;
+      const pintar = () => { $("#tiempo").textContent = reloj(quedan); };
+      $("#iniciar").onclick = () => {
+        corriendo = !corriendo;
+        $("#iniciar").textContent = corriendo ? "Pausar" : "Seguir";
+        clearInterval(intervalo);
+        if (corriendo) intervalo = setInterval(() => {
+          quedan--; pintar();
+          if (quedan <= 0) { clearInterval(intervalo); corriendo = false; $("#reloj").classList.add("fin"); $("#iniciar").textContent = "Listo"; pitar(); }
+        }, 1000);
+      };
+      $("#reiniciar").onclick = () => { clearInterval(intervalo); quedan = seg; corriendo = false; $("#reloj").classList.remove("fin"); $("#iniciar").textContent = "Iniciar"; pintar(); };
+    }
+  }
+
+  // ── Mi semana ───────────────────────────────────────────────────────
+  function armarSemana() {
+    // Lunes a viernes: rápidos (express, para llevar, dulce, salado). Fin de semana: los de compartir.
+    const usados = new Set();
+    const elegir = tipos => {
+      const pool = RECETAS.filter(r => tipos.includes(r.tipo) && !usados.has(r.id));
+      const nuevas = pool.filter(r => !estado.hechos.includes(r.id));
+      const lista = nuevas.length ? nuevas : pool;
+      const r = lista[Math.floor(Math.random() * lista.length)]; usados.add(r.id); return r.id;
+    };
+    const plan = [["salado", "dulce"], ["express", "llevar"], ["dulce", "salado"], ["llevar", "express"], ["salado", "dulce"], ["finde"], ["finde"]];
+    plan.forEach((t, n) => estado.semana[n] = elegir(t));
+    guardar(); avisar("Semana armada sin repetir");
+  }
+
+  function vistaSemana() {
+    const dias = DIAS.map((d, n) => {
+      const r = estado.semana[n] && POR_ID[estado.semana[n]];
+      return r ? `<div class="dia"><span class="d">${d.slice(0, 3)}</span><div class="foto" ${fondoFoto(r)}></div>
+          <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${r.min} min</small></a><button class="x" data-quitar="${n}" aria-label="Quitar">×</button></div>`
+        : `<div class="dia vacia"><span class="d">${d.slice(0, 3)}</span><div class="foto foto-falta"></div><span class="nom">Sin elegir · tócalo en una receta o arma la semana</span></div>`;
+    }).join("");
+    app.innerHTML = cabecera("Mi semana", "Siete desayunos distintos, sin repetir") + `
+      <div class="botonera"><button class="btn prim" id="armar">🎲 Armar mi semana automáticamente</button></div>
+      <div class="personas"><span>¿Para cuántas personas?</span><span class="porciones"><button id="pmenos">−</button><b>${estado.personas}</b><button id="pmas">+</button></span></div>
+      ${dias}
+      <div class="botonera"><a class="btn" href="#/compras">🛒 Ver la lista de compras de la semana</a></div>`;
+    $("#armar").onclick = () => { armarSemana(); vistaSemana(); };
+    $("#pmenos").onclick = () => { estado.personas = Math.max(1, estado.personas - 1); guardar(); vistaSemana(); };
+    $("#pmas").onclick = () => { estado.personas = Math.min(12, estado.personas + 1); guardar(); vistaSemana(); };
+    app.querySelectorAll("[data-quitar]").forEach(b => b.onclick = () => { delete estado.semana[b.dataset.quitar]; guardar(); vistaSemana(); });
+  }
+
+  // ── Lista de compras: suma los ingredientes de la semana ────────────
+  function listaCompras() {
+    const suma = {};
+    Object.values(estado.semana).forEach(id => {
+      const r = POR_ID[id]; if (!r) return;
+      const factor = estado.personas / r.porciones;
+      r.ing.forEach(([cant, unidad, item]) => {
+        // Las cucharaditas se suman como cucharadas (3 cdta = 1 cda) para no repetir el ingrediente.
+        if (unidad === "cdta" && cant !== null) { cant = cant / 3; unidad = "cda"; }
+        const k = item + "|" + unidad;
+        suma[k] = suma[k] || { item, unidad, cant: cant === null ? null : 0, recetas: new Set() };
+        if (cant !== null) suma[k].cant += cant * factor;
+        suma[k].recetas.add(r.nombre);
+      });
+    });
+    return Object.entries(suma).sort((a, b) => a[1].item.localeCompare(b[1].item, "es"));
+  }
+
+  function vistaCompras() {
+    const lista = listaCompras();
+    const items = lista.map(([k, v]) => {
+      const ok = !!estado.compradas[k];
+      return `<li class="${ok ? "ok" : ""}"><input type="checkbox" data-k="${esc(k)}" ${ok ? "checked" : ""}><span>${esc(texto([v.cant, v.unidad, v.item]))}<small>Para: ${esc([...v.recetas].join(", "))}</small></span></li>`;
+    }).join("");
+    app.innerHTML = cabecera("Compras", `Lo que necesitas para tu semana · ${estado.personas} ${estado.personas > 1 ? "personas" : "persona"}`) +
+      (lista.length ? `<div class="botonera" style="grid-template-columns:1fr 1fr"><button class="btn" id="compartir">📤 Compartir</button><button class="btn" id="limpiar">↺ Desmarcar</button></div><ul class="compras">${items}</ul>`
+        : `<p class="vacio">Tu lista está vacía.<br>Arma tu semana y aquí aparece todo lo que necesitas comprar.</p><div class="botonera"><a class="btn prim" href="#/semana">📅 Ir a Mi semana</a></div>`);
+    app.querySelectorAll("[data-k]").forEach(c => c.onchange = () => { estado.compradas[c.dataset.k] = c.checked; c.parentElement.classList.toggle("ok", c.checked); guardar(); });
+    const limpiar = $("#limpiar"); if (limpiar) limpiar.onclick = () => { estado.compradas = {}; guardar(); vistaCompras(); };
+    const compartir = $("#compartir");
+    if (compartir) compartir.onclick = async () => {
+      const txt = "Lista de compras · Adiós Pan\n" + lista.map(([, v]) => "• " + texto([v.cant, v.unidad, v.item])).join("\n");
+      try { if (navigator.share) await navigator.share({ title: "Lista de compras", text: txt }); else { await navigator.clipboard.writeText(txt); avisar("Lista copiada"); } } catch (e) {}
+    };
+  }
+
+  function vistaFavoritos() {
+    const favs = estado.favs.map(id => POR_ID[id]).filter(Boolean);
+    app.innerHTML = cabecera("Favoritos", "Los desayunos que quieres repetir") +
+      `<div class="lista">${favs.map(tarjeta).join("") || '<p class="vacio">Todavía no tienes favoritos.<br>Toca ☆ en cualquier receta para guardarla aquí.</p>'}</div>`;
+  }
+
+  // ════════════════════════════════════════════════════════════════════
+  //  Rutas
+  // ════════════════════════════════════════════════════════════════════
+  function rutear() {
+    const [, ruta, a, b] = (location.hash || "#/").split("/");
+    if (ruta !== "cocina") { clearInterval(intervalo); soltarPantalla(); }
+    $("#navbar").style.display = ruta === "cocina" ? "none" : "";
+    document.querySelectorAll(".navbar a").forEach(l => l.classList.toggle("on", l.dataset.ruta === (ruta || "inicio")));
+    if (ruta === "receta") vistaReceta(a);
+    else if (ruta === "cocina") vistaCocina(a, b);
+    else if (ruta === "semana") vistaSemana();
+    else if (ruta === "compras") vistaCompras();
+    else if (ruta === "favoritos") vistaFavoritos();
+    else vistaInicio();
+    if (ruta !== "cocina") window.scrollTo(0, 0);
+  }
+  addEventListener("hashchange", rutear);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && location.hash.startsWith("#/cocina")) mantenerEncendida(); });
+  rutear();
+
+  if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+})();
+</script>
+</body>
+</html>
