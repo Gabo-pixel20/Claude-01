@@ -138,6 +138,20 @@ img { display: block; max-width: 100%; }
 .navbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 9px 0 8px; color: var(--gris); text-decoration: none; font-size: 11px; font-weight: 700; }
 .navbar a svg { width: 24px; height: 24px; }
 .navbar a.on { color: var(--verde); }
+/* Acceso */
+.login { min-height: 100vh; display: flex; flex-direction: column; }
+.login .cab { padding-top: calc(48px + env(safe-area-inset-top)); padding-bottom: 34px; text-align: center; }
+.login .cab .cur { font-size: 64px; }
+.login form { padding: 26px 20px; display: grid; gap: 12px; }
+.login h1 { font-size: 21px; line-height: 1.25; }
+.login p { font-size: 14px; color: var(--gris); line-height: 1.5; }
+.login input { padding: 15px 14px; border-radius: 14px; border: 2px solid var(--borde); background: #fff; font-size: 16px; }
+.login input:focus { outline: none; border-color: var(--verde); }
+.login .error { color: #b3261e; font-size: 13px; font-weight: 700; min-height: 1.2em; }
+.login .ayuda { font-size: 13px; text-align: center; margin-top: 6px; }
+.login .ayuda a { color: var(--verde); font-weight: 700; text-decoration: underline; }
+.salir { position: absolute; top: calc(16px + env(safe-area-inset-top)); right: 16px; color: #fff; font-size: 12px; font-weight: 700; opacity: .85; text-decoration: underline; }
+.cab { position: relative; }
 .aviso { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 60; opacity: 0; transition: opacity .25s; pointer-events: none; white-space: nowrap; }
 .aviso.ver { opacity: 1; }
 </style>
@@ -155,6 +169,17 @@ img { display: block; max-width: 100%; }
 <script src="recetas.js"></script>
 <script>
 (() => {
+  // ════════════════════════════════════════════════════════════════════
+  //  Configuración del acceso
+  // ════════════════════════════════════════════════════════════════════
+  const CONFIG = {
+    // Dirección que verifica si un correo compró. Mientras esté vacía, entra
+    // cualquier correo válido. Cuando exista la base de datos, debe responder a
+    // POST {"correo": "..."} con {"acceso": true} o {"acceso": false}.
+    API_VERIFICACION: "",
+    SOPORTE: "mvdreal8@gmail.com",
+  };
+
   // ════════════════════════════════════════════════════════════════════
   //  Datos y estado
   // ════════════════════════════════════════════════════════════════════
@@ -225,9 +250,56 @@ img { display: block; max-width: 100%; }
         <div class="meta"><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span><span>⏱ ${r.min} min</span>${fav ? "<span>★</span>" : ""}${hecho ? '<span class="marca">✓ Hecho</span>' : ""}</div></div></a>`;
   }
 
+  // ── Acceso: inicio de sesión con el correo de la compra ─────────────
+  const SESION = "adiospan:sesion";
+  const sesion = () => { try { return JSON.parse(localStorage.getItem(SESION) || "null"); } catch (e) { return null; } };
+  const correoValido = c => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c);
+
+  // Único punto que decide si un correo tiene acceso. Hoy, sin base de datos,
+  // aprueba cualquier correo válido; con API_VERIFICACION, pregunta al servidor.
+  async function verificarAcceso(correo) {
+    if (!CONFIG.API_VERIFICACION) return { acceso: true };
+    const r = await fetch(CONFIG.API_VERIFICACION, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ correo }) });
+    if (!r.ok) throw new Error("verificacion " + r.status);
+    return r.json();
+  }
+
+  function vistaLogin() {
+    $("#navbar").style.display = "none";
+    app.innerHTML = `<div class="login"><header class="cab"><div class="cur">Adiós Pan</div><p>80 desayunos sin pan para no repetir</p></header>
+      <form id="form-login" novalidate>
+        <h1>Entra con el correo de tu compra</h1>
+        <p>Usa el mismo correo con el que pagaste en Hotmart. Solo te lo pedimos una vez en este dispositivo.</p>
+        <input id="correo" type="email" inputmode="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+        <p class="error" id="error"></p>
+        <button class="btn prim" id="entrar" type="submit">Entrar</button>
+        <p class="ayuda">¿No encuentras tu correo de compra? <a href="mailto:${CONFIG.SOPORTE}">Escríbenos</a></p>
+      </form></div>`;
+    $("#form-login").onsubmit = async e => {
+      e.preventDefault();
+      const correo = $("#correo").value.trim().toLowerCase(), error = $("#error"), boton = $("#entrar");
+      if (!correoValido(correo)) { error.textContent = "Revisa el correo: parece que le falta algo."; return; }
+      boton.disabled = true; boton.textContent = "Verificando…"; error.textContent = "";
+      try {
+        const r = await verificarAcceso(correo);
+        if (!r.acceso) { error.textContent = "No encontramos una compra con ese correo. Revisa que sea el mismo de Hotmart."; return; }
+        localStorage.setItem(SESION, JSON.stringify({ correo, desde: new Date().toISOString() }));
+        rutear();
+      } catch (err) {
+        error.textContent = "No pudimos verificar tu correo. Revisa tu conexión e inténtalo de nuevo.";
+      } finally { boton.disabled = false; boton.textContent = "Entrar"; }
+    };
+  }
+
+  function cerrarSesion() {
+    if (!confirm("¿Cerrar sesión en este dispositivo?")) return;
+    try { localStorage.removeItem(SESION); } catch (e) {}
+    location.hash = "#/"; rutear();
+  }
+
   function cabecera(titulo, sub, volver) {
     const n = estado.hechos.length;
-    return `<header class="cab">${volver ? `<a class="volver" href="${volver}">‹ Volver</a>` : ""}
+    return `<header class="cab">${volver ? `<a class="volver" href="${volver}">‹ Volver</a>` : '<button class="salir" id="salir">Cerrar sesión</button>'}
       <div class="cur">${titulo}</div><p>${sub}</p>
       ${volver ? "" : `<div class="progreso"><i style="width:${(100 * n / RECETAS.length).toFixed(1)}%"></i></div><small>${n} de ${RECETAS.length} desayunos probados</small>`}</header>`;
   }
@@ -450,6 +522,7 @@ img { display: block; max-width: 100%; }
   //  Rutas
   // ════════════════════════════════════════════════════════════════════
   function rutear() {
+    if (!sesion()) return vistaLogin();
     const [, ruta, a, b] = (location.hash || "#/").split("/");
     if (ruta !== "cocina") { clearInterval(intervalo); soltarPantalla(); }
     $("#navbar").style.display = ruta === "cocina" ? "none" : "";
@@ -463,6 +536,7 @@ img { display: block; max-width: 100%; }
     if (ruta !== "cocina") window.scrollTo(0, 0);
   }
   addEventListener("hashchange", rutear);
+  document.addEventListener("click", e => { if (e.target.closest("#salir")) cerrarSesion(); });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && location.hash.startsWith("#/cocina")) mantenerEncendida(); });
   rutear();
 
