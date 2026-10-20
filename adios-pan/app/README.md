@@ -18,3 +18,10 @@ Hoy entra cualquier correo válido. Para conectar la base de datos de compradore
 
 Nada más cambia: toda la decisión está en la función `verificarAcceso(correo)`.
 Hotmart puede llenar esa base de datos con sus webhooks de compra aprobada y de reembolso.
+
+## Planes (fase de test)
+
+Por ahora **todos los compradores acceden a todo**, compren el plan de $6.99 o el de $9.99.
+El contenido del Plan Completo (almuerzos y cenas) irá dentro de esta misma app.
+Si el producto se valida, la base de datos de accesos distinguirá los planes
+(por ejemplo, que `API_VERIFICACION` responda también el plan del comprador).
