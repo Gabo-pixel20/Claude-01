@@ -49,6 +49,9 @@ img { display: block; max-width: 100%; }
 .chip.on { background: var(--verde); border-color: var(--verde); color: #fff; }
 .tipo { display: inline-block; color: #fff; font-size: 11px; font-weight: 700; border-radius: 12px; padding: 2px 9px; }
 .t-dulce { background: var(--t-dulce); } .t-salado { background: var(--t-salado); } .t-llevar { background: var(--t-llevar); } .t-express { background: var(--t-express); } .t-finde { background: var(--t-finde); }
+.t-pollo { background: #D98E04; } .t-res { background: #B5432F; } .t-cerdo { background: #D06A7E; } .t-pescado { background: #2E86C1; } .t-legumbres { background: #4E9A3A; } .t-sopas { background: #C9772B; } .t-pastas { background: #8C6BC4; }
+.t-lonchera { background: #7D5BD6; } .t-batido { background: #2FA866; } .t-merienda { background: #E0752D; }
+.chip.fav { border-color: var(--yema); background: #fff6dc; }
 .lista { padding: 8px 16px; display: grid; gap: 10px; }
 .tarjeta { display: flex; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); text-align: left; width: 100%; position: relative; }
 .tarjeta .foto { width: 104px; flex: none; aspect-ratio: 1; background: #eee center/cover; }
@@ -134,7 +137,7 @@ img { display: block; max-width: 100%; }
 
 /* Navegación inferior */
 .navbar { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--borde); display: flex; justify-content: center; padding-bottom: env(safe-area-inset-bottom); z-index: 30; }
-.navbar .in { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 560px; }
+.navbar .in { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; max-width: 560px; }
 .navbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 9px 0 8px; color: var(--gris); text-decoration: none; font-size: 11px; font-weight: 700; }
 .navbar a svg { width: 24px; height: 24px; }
 .navbar a.on { color: var(--verde); }
@@ -154,19 +157,71 @@ img { display: block; max-width: 100%; }
 .cab { position: relative; }
 .aviso { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 60; opacity: 0; transition: opacity .25s; pointer-events: none; white-space: nowrap; }
 .aviso.ver { opacity: 1; }
+
+/* Notas de la receta (congelar, noche anterior) y textos de los bonos */
+.nota { background: #eef6fb; border: 2px solid #cfe4f2; border-radius: 14px; padding: 12px 14px; margin: 4px 0 6px; font-size: 14px; line-height: 1.5; }
+.nota b { display: block; font-size: 15px; margin-bottom: 2px; }
+.nota.noche { background: #f3effc; border-color: #dcd2f5; }
+.intro { margin: 14px 16px 4px; background: #fff; border-radius: 16px; padding: 14px 16px; font-size: 14px; line-height: 1.55; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+.intro b { color: var(--verde); }
+.intro ul { margin: 8px 0 0 18px; }
+.intro li { margin: 3px 0; }
+details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; }
+.tanda-vacia { margin: 0 16px 8px; background: #fff; border: 2px dashed var(--borde); border-radius: 14px; padding: 14px; font-size: 14px; color: var(--gris); text-align: center; line-height: 1.5; }
+
+/* Bonos */
+.bono { display: block; margin: 14px 16px; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+.bono img { width: 100%; height: 170px; object-fit: cover; }
+.bono .tx { padding: 12px 14px 14px; }
+.bono small { font-size: 11px; font-weight: 700; color: var(--naranja); letter-spacing: .06em; }
+.bono b { display: block; font-size: 17px; line-height: 1.25; margin: 2px 0 4px; }
+.bono p { font-size: 13px; color: var(--gris); line-height: 1.45; }
+.bono .abrir { display: inline-block; margin-top: 10px; font-weight: 700; color: var(--verde); font-size: 14px; }
+.bono .libre { display: inline-block; background: var(--yema); color: var(--verde-oscuro); border-radius: 10px; padding: 1px 8px; font-size: 11px; margin-left: 6px; letter-spacing: 0; }
+
+/* Guía de porciones */
+.guia { padding: 6px 16px 16px; font-size: 14.5px; line-height: 1.55; }
+.guia h2 { font-size: 18px; color: var(--verde); margin: 18px 0 8px; }
+.guia p { margin: 6px 0; }
+.plato { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+.plato div { background: #fff; border-radius: 14px; padding: 12px; border-top: 6px solid var(--c); }
+.plato b { display: block; font-size: 15px; }
+.plato span { display: block; font-size: 13px; color: var(--gris); line-height: 1.45; margin-top: 2px; }
+.plato em { display: block; font-style: normal; font-weight: 700; font-size: 13px; color: var(--tinta); margin-top: 6px; }
+.tabla { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 13px; }
+.tabla th, .tabla td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--borde); vertical-align: top; }
+.tabla th { background: var(--verde); color: #fff; font-size: 12px; }
+.guia ol, .guia ul { margin: 6px 0 6px 20px; }
+.guia li { margin: 4px 0; }
+.guia .aclara { font-size: 12px; color: var(--gris); margin-top: 16px; }
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff; }
+  .navbar, .noimprimir, .aviso { display: none !important; }
+  .contenedor { padding: 0; max-width: none; }
+  .cab { background: #fff; color: var(--verde); padding: 0 0 6px; border-bottom: 3px solid var(--verde); }
+  .cab .cur { color: var(--verde); }
+  .guia { padding: 0; font-size: 12.5px; }
+  .plato { grid-template-columns: repeat(4, 1fr); }
+  .plato div, .tabla { border: 1px solid var(--borde); }
+  .guia h2 { break-after: avoid; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 </head>
 <body>
 <div id="app" class="contenedor"></div>
 <nav class="navbar" id="navbar"><div class="in">
-  <a href="#/" data-ruta="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+  <a href="#/" data-ruta="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M8 7c0-1.5 1-1.5 1-3M12 7c0-1.5 1-1.5 1-3M16 7c0-1.5 1-1.5 1-3"/></svg>Desayunos</a>
+  <a href="#/comidas" data-ruta="comidas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M2 10h20M9 6V4h6v2"/></svg>Comidas</a>
   <a href="#/semana" data-ruta="semana"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Mi semana</a>
   <a href="#/compras" data-ruta="compras"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Compras</a>
-  <a href="#/favoritos" data-ruta="favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>Favoritos</a>
+  <a href="#/bonos" data-ruta="bonos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M2 9h20v-2H2zM12 7v14M12 7c-2-4-6-4-6-1.5S10 7 12 7zM12 7c2-4 6-4 6-1.5S14 7 12 7z"/></svg>Bonos</a>
 </div></nav>
 <div class="aviso" id="aviso"></div>
 
 <script src="recetas.js"></script>
+<script src="extras.js"></script>
 <script>
 (() => {
   // ════════════════════════════════════════════════════════════════════
@@ -183,14 +238,26 @@ img { display: block; max-width: 100%; }
   // ════════════════════════════════════════════════════════════════════
   //  Datos y estado
   // ════════════════════════════════════════════════════════════════════
-  const RECETAS = window.RECETAS;
+  // Desayunos (recetas.js) + almuerzos y cenas y bonos (extras.js). Por ahora
+  // todos acceden a todo, compren el plan que compren (fase de test).
+  const DESAYUNOS = window.RECETAS;
+  const RECETAS = DESAYUNOS.concat(window.EXTRAS || []);
   const POR_ID = Object.fromEntries(RECETAS.map(r => [r.id, r]));
-  const TIPOS = { dulce: "Dulce", salado: "Salado", llevar: "Para llevar", express: "Express", finde: "Fin de semana" };
+  const COMIDAS = RECETAS.filter(r => r.col === "comida");
+  const coleccion = col => RECETAS.filter(r => r.col === col);
+  const TIPOS_DESAYUNO = { dulce: "Dulce", salado: "Salado", llevar: "Para llevar", express: "Express", finde: "Fin de semana" };
+  const TIPOS_COMIDA = { pollo: "Pollo", res: "Res", cerdo: "Cerdo", pescado: "Pescado y mariscos", legumbres: "Vegetariano", sopas: "Sopas y cremas", pastas: "Pastas y arroces" };
+  const TIPOS = { ...TIPOS_DESAYUNO, ...TIPOS_COMIDA, lonchera: "Lonchera", batido: "Batido o jugo", merienda: "Merienda" };
+  // A dónde vuelve cada receta según su colección.
+  const VOLVER = { comida: "#/comidas", lonchera: "#/bono/loncheras", batido: "#/bono/batidos", merienda: "#/bono/meriendas" };
+  const volverDe = r => VOLVER[r.col] || "#/";
+  // Bono 1: el mismo plan que muestra su imagen en la landing.
+  const PLAN7 = ["huevos-mexicana", "avena-platano", "parfait-mango", "omelette-espinaca", "batido-verde", "panqueques-avena", "waffles-avena"];
   const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
   const CLAVE = "adiospan:v1";
 
   const estado = (() => {
-    const base = { hechos: [], favs: [], semana: {}, personas: 2, compradas: {}, filtro: "todos", ultimoSorpresa: null };
+    const base = { hechos: [], favs: [], semana: {}, tanda: [], personas: 2, compradas: {}, filtro: "todos", filtroComida: "todos", ultimoSorpresa: null };
     try { return Object.assign(base, JSON.parse(localStorage.getItem(CLAVE) || "{}")); } catch (e) { return base; }
   })();
   const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) {} };
@@ -230,10 +297,13 @@ img { display: block; max-width: 100%; }
     "plátano maduro (para cocinar)": ["plátano maduro (para cocinar)", "plátanos maduros (para cocinar)"],
     "rebanadas de jamón": ["rebanada de jamón", "rebanadas de jamón"], "rebanadas de queso": ["rebanada de queso", "rebanadas de queso"],
     "tomate": ["tomate", "tomates"], "tomates cherry": ["tomate cherry", "tomates cherry"], "zanahoria rallada": ["zanahoria rallada", "zanahorias ralladas"],
+    ...(window.PLURALES_EXTRA || {}),
   };
   function texto([cant, unidad, item], factor = 1) {
     if (cant === null) return `${item[0].toUpperCase() + item.slice(1)} al gusto`;
     const n = redondear(cant * factor, unidad);
+    if (unidad === "g" && n >= 1000) return `${numero(Math.round(n / 50) / 20)} kg de ${item}`;
+    if (unidad === "ml" && n >= 1000) return `${numero(Math.round(n / 50) / 20)} l de ${item}`;
     if (unidad === "u") { const [s, p] = NOMBRES[item] || [item, item]; return `${numero(n)} ${n > 1 ? p : s}`; }
     const [s, p] = UNIDADES[unidad] || [unidad, unidad];
     return `${numero(n)} ${n > 1 ? p : s} de ${item}`;
@@ -297,35 +367,54 @@ img { display: block; max-width: 100%; }
     location.hash = "#/"; rutear();
   }
 
-  function cabecera(titulo, sub, volver) {
-    const n = estado.hechos.length;
+  // Solo la pantalla de desayunos lleva la barra de progreso.
+  function cabecera(titulo, sub, volver, progreso) {
+    const n = estado.hechos.filter(id => POR_ID[id] && !POR_ID[id].col).length;
     return `<header class="cab">${volver ? `<a class="volver" href="${volver}">‹ Volver</a>` : '<button class="salir" id="salir">Cerrar sesión</button>'}
       <div class="cur">${titulo}</div><p>${sub}</p>
-      ${volver ? "" : `<div class="progreso"><i style="width:${(100 * n / RECETAS.length).toFixed(1)}%"></i></div><small>${n} de ${RECETAS.length} desayunos probados</small>`}</header>`;
+      ${progreso ? `<div class="progreso"><i style="width:${(100 * n / DESAYUNOS.length).toFixed(1)}%"></i></div><small>${n} de ${DESAYUNOS.length} desayunos probados</small>` : ""}</header>`;
   }
 
-  function filtradas() {
-    const q = (estado.busqueda || "").trim().toLowerCase();
-    return RECETAS.filter(r => (estado.filtro === "todos" || r.tipo === estado.filtro) &&
+  function filtrar(base, filtro, busqueda) {
+    const q = (busqueda || "").trim().toLowerCase();
+    return base.filter(r => (filtro === "todos" || r.tipo === filtro) &&
       (!q || r.nombre.toLowerCase().includes(q) || r.ing.some(i => i[2].toLowerCase().includes(q))));
   }
 
-  function vistaInicio() {
-    const chips = [["todos", "Todos"], ...Object.entries(TIPOS)].map(([k, v]) => `<button class="chip ${estado.filtro === k ? "on" : ""}" data-filtro="${k}">${v}</button>`).join("");
-    const lista = filtradas();
-    app.innerHTML = cabecera("Adiós Pan", "¿Qué desayunamos hoy?") + `
-      <button class="sorprendeme" id="sorprendeme">🎲 Sorpréndeme</button>
-      <input class="buscar" id="buscar" type="search" placeholder="Busca por nombre o ingrediente (huevo, avena…)" value="${esc(estado.busqueda || "")}">
+  // Lista con Sorpréndeme, buscador y filtros por tipo. La usan Desayunos y Comidas.
+  function vistaLista({ titulo, sub, progreso, base, tipos, clave, buscar, placeholder, vacio, antes = "" }) {
+    const filtro = estado[clave] || "todos";
+    const chips = `<a class="chip fav" href="#/favoritos">★ Favoritos</a>` +
+      [["todos", "Todos"], ...Object.entries(tipos)].map(([k, v]) => `<button class="chip ${filtro === k ? "on" : ""}" data-filtro="${k}">${v}</button>`).join("");
+    const pintar = () => filtrar(base, filtro, estado[buscar]).map(tarjeta).join("") || `<p class="vacio">${vacio}</p>`;
+    app.innerHTML = cabecera(titulo, sub, null, progreso) + `
+      <button class="sorprendeme" id="sorprendeme">🎲 Sorpréndeme</button>${antes}
+      <input class="buscar" id="buscar" type="search" placeholder="${placeholder}" value="${esc(estado[buscar] || "")}">
       <div class="filtros">${chips}</div>
-      <div class="lista" id="lista">${lista.map(tarjeta).join("") || '<p class="vacio">No encontramos desayunos con esa búsqueda.</p>'}</div>`;
-    app.querySelectorAll("[data-filtro]").forEach(b => b.onclick = () => { estado.filtro = b.dataset.filtro; guardar(); vistaInicio(); });
-    $("#buscar").oninput = e => { estado.busqueda = e.target.value; $("#lista").innerHTML = filtradas().map(tarjeta).join("") || '<p class="vacio">No encontramos desayunos con esa búsqueda.</p>'; };
-    $("#sorprendeme").onclick = sorprender;
+      <div class="lista" id="lista">${pintar()}</div>`;
+    app.querySelectorAll("[data-filtro]").forEach(b => b.onclick = () => { estado[clave] = b.dataset.filtro; guardar(); rutear(); });
+    $("#buscar").oninput = e => { estado[buscar] = e.target.value; $("#lista").innerHTML = pintar(); };
+    $("#sorprendeme").onclick = () => sorprender(filtro === "todos" ? base : base.filter(r => r.tipo === filtro));
+  }
+
+  function vistaInicio() {
+    vistaLista({ titulo: "Adiós Pan", sub: "¿Qué desayunamos hoy?", progreso: true, base: DESAYUNOS, tipos: TIPOS_DESAYUNO,
+      clave: "filtro", buscar: "busqueda", placeholder: "Busca por nombre o ingrediente (huevo, avena…)", vacio: "No encontramos desayunos con esa búsqueda." });
+  }
+
+  function vistaComidas() {
+    const consejos = `<details class="intro"><summary>❄️ Cómo cocinar una vez y comer toda la semana</summary><ul>
+      <li>Elige 2 o 3 recetas y cocínalas el mismo día: el fin de semana o la noche que tengas libre.</li>
+      <li>Deja enfriar por completo antes de congelar (máximo 2 horas fuera de la nevera).</li>
+      <li>Reparte en recipientes de una porción y escribe el nombre y la fecha.</li>
+      <li>Descongela en la nevera la noche anterior y calienta hasta que hierva o salga vapor por todas partes.</li>
+      <li>Lo que ya descongelaste no lo vuelvas a congelar.</li></ul></details>`;
+    vistaLista({ titulo: "Almuerzos y cenas", sub: `${COMIDAS.length} recetas para cocinar una vez y comer bien toda la semana`, base: COMIDAS, tipos: TIPOS_COMIDA,
+      clave: "filtroComida", buscar: "busquedaComida", placeholder: "Busca por nombre o ingrediente (pollo, lentejas…)", vacio: "No encontramos comidas con esa búsqueda.", antes: consejos });
   }
 
   // ── Sorpréndeme: elige sin repetir los que ya hiciste ───────────────
-  function sorprender() {
-    const base = estado.filtro === "todos" ? RECETAS : RECETAS.filter(r => r.tipo === estado.filtro);
+  function sorprender(base) {
     let opciones = base.filter(r => !estado.hechos.includes(r.id) && r.id !== estado.ultimoSorpresa);
     let reinicio = false;
     if (!opciones.length) { opciones = base.filter(r => r.id !== estado.ultimoSorpresa); reinicio = true; }
@@ -348,7 +437,7 @@ img { display: block; max-width: 100%; }
     }, 110);
     fondo.onclick = e => { if (e.target === fondo) cerrar(); };
     const cerrar = () => { clearInterval(giro); fondo.remove(); };
-    fondo.querySelector("#otra").onclick = () => { cerrar(); sorprender(); };
+    fondo.querySelector("#otra").onclick = () => { cerrar(); sorprender(base); };
     fondo.querySelector("#ver").onclick = () => { cerrar(); location.hash = "#/receta/" + elegida.id; };
   }
 
@@ -358,30 +447,37 @@ img { display: block; max-width: 100%; }
     const porc = estado.porcionesReceta && estado.porcionesReceta[id] || r.porciones;
     const factor = porc / r.porciones;
     const hecho = estado.hechos.includes(id), fav = estado.favs.includes(id);
+    // Comidas: a la tanda para congelar. Meriendas: no van a la semana. El resto: a un día de la semana.
+    const enTanda = estado.tanda.includes(id);
+    const semana = r.col === "comida" ? `<button class="btn ${enTanda ? "activo" : ""}" id="tanda">${enTanda ? "❄️ En tu tanda" : "❄️ A mi tanda"}</button>`
+      : r.col === "merienda" ? "" : `<button class="btn" id="semana">📅 A mi semana</button>`;
     app.innerHTML = `
-      <div class="det-foto" ${fondoFoto(r)}><a class="volver" href="#/">‹ Volver</a></div>
+      <div class="det-foto" ${fondoFoto(r)}><a class="volver" href="${volverDe(r)}">‹ Volver</a></div>
       <div class="det">
         <span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span>
         <h1>${esc(r.nombre)}</h1>
         <div class="meta"><span>⏱ ${r.min} minutos</span><span>·</span><span>${r.pasos.length} pasos</span></div>
         <div class="acciones">
           <button class="btn prim" id="cocinar">▶ Modo cocina</button>
-          <button class="btn ${fav ? "activo" : ""}" id="fav">${fav ? "★ En favoritos" : "☆ Favorito"}</button>
-          <button class="btn" id="semana">📅 A mi semana</button>
+          <button class="btn ${fav ? "activo" : ""}" id="fav" ${semana ? "" : 'style="grid-column:1/-1"'}>${fav ? "★ En favoritos" : "☆ Favorito"}</button>
+          ${semana}
           <button class="btn ${hecho ? "hecho" : ""}" id="hecho" style="grid-column:1/-1">${hecho ? "✓ Ya lo hiciste" : "Marcar como hecho"}</button>
         </div>
+        ${r.congela ? `<div class="nota"><b>❄️ Congela y recalienta</b>Dura hasta ${r.congela[0]} ${r.congela[0] > 1 ? "meses" : "mes"} en el congelador, en recipientes bien cerrados. ${esc(r.congela[1])}</div>` : ""}
+        ${r.noche ? `<div class="nota noche"><b>🌙 La noche anterior</b>${esc(r.noche)}</div>` : ""}
         <h2>Ingredientes <span class="porciones"><button id="menos">−</button><span>${porc} ${porc > 1 ? "porciones" : "porción"}</span><button id="mas">+</button></span></h2>
         <ul class="ing">${r.ing.map((i, n) => `<li><input type="checkbox" id="i${n}"><span>${esc(texto(i, factor))}</span></li>`).join("")}</ul>
         <h2>Preparación</h2>
         <ol class="pasos">${r.pasos.map((p, n) => `<li><span class="n">${n + 1}</span><div>${esc(p[0])}${p[1] ? `<br><small>⏱ ${reloj(p[1])}</small>` : ""}</div></li>`).join("")}</ol>
       </div>`;
     app.querySelectorAll(".ing input").forEach(c => c.onchange = () => c.parentElement.classList.toggle("ok", c.checked));
-    const cambiar = d => { estado.porcionesReceta = estado.porcionesReceta || {}; estado.porcionesReceta[id] = Math.max(1, Math.min(12, porc + d)); guardar(); vistaReceta(id); };
+    const cambiar = d => { estado.porcionesReceta = estado.porcionesReceta || {}; estado.porcionesReceta[id] = Math.max(1, Math.min(16, porc + d)); guardar(); vistaReceta(id); };
     $("#menos").onclick = () => cambiar(-1); $("#mas").onclick = () => cambiar(1);
     $("#cocinar").onclick = () => location.hash = `#/cocina/${id}/0`;
     $("#fav").onclick = () => { alternar(estado.favs, id); guardar(); avisar(estado.favs.includes(id) ? "Guardado en favoritos" : "Quitado de favoritos"); vistaReceta(id); };
     $("#hecho").onclick = () => { alternar(estado.hechos, id); guardar(); vistaReceta(id); };
-    $("#semana").onclick = () => elegirDia(id);
+    if ($("#semana")) $("#semana").onclick = () => elegirDia(id);
+    if ($("#tanda")) $("#tanda").onclick = () => { alternar(estado.tanda, id); guardar(); avisar(estado.tanda.includes(id) ? "Agregada a tu tanda de la semana" : "Quitada de tu tanda"); vistaReceta(id); };
   }
   const alternar = (arr, v) => { const i = arr.indexOf(v); i < 0 ? arr.push(v) : arr.splice(i, 1); };
   const reloj = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
@@ -425,7 +521,7 @@ img { display: block; max-width: 100%; }
     $("#sig").onclick = () => {
       if (!ultimo) return (location.hash = `#/cocina/${id}/${n + 1}`);
       if (!estado.hechos.includes(id)) estado.hechos.push(id);
-      guardar(); soltarPantalla(); avisar("¡Buen provecho! Marcado como hecho"); location.hash = "#/";
+      guardar(); soltarPantalla(); avisar("¡Buen provecho! Marcado como hecho"); location.hash = volverDe(r);
     };
     if (seg) {
       let quedan = seg, corriendo = false;
@@ -458,6 +554,18 @@ img { display: block; max-width: 100%; }
     guardar(); avisar("Semana armada sin repetir");
   }
 
+  // Tanda: 3 comidas de categorías distintas, priorizando las que aún no has hecho.
+  function armarTanda() {
+    const cats = Object.keys(TIPOS_COMIDA).sort(() => Math.random() - .5).slice(0, 3);
+    estado.tanda = cats.map(c => {
+      const pool = COMIDAS.filter(r => r.tipo === c), nuevas = pool.filter(r => !estado.hechos.includes(r.id));
+      const lista = nuevas.length ? nuevas : pool;
+      return lista[Math.floor(Math.random() * lista.length)].id;
+    });
+    guardar(); avisar("Tanda armada: 3 recetas para congelar");
+  }
+  const porcionesDe = r => estado.porcionesReceta && estado.porcionesReceta[r.id] || r.porciones;
+
   function vistaSemana() {
     const dias = DIAS.map((d, n) => {
       const r = estado.semana[n] && POR_ID[estado.semana[n]];
@@ -465,12 +573,21 @@ img { display: block; max-width: 100%; }
           <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${r.min} min</small></a><button class="x" data-quitar="${n}" aria-label="Quitar">×</button></div>`
         : `<div class="dia vacia"><span class="d">${d.slice(0, 3)}</span><div class="foto foto-falta"></div><span class="nom">Sin elegir · tócalo en una receta o arma la semana</span></div>`;
     }).join("");
-    app.innerHTML = cabecera("Mi semana", "Siete desayunos distintos, sin repetir") + `
+    const tanda = estado.tanda.map(id => POR_ID[id]).filter(Boolean).map(r => `<div class="dia"><span class="d">❄️</span><div class="foto" ${fondoFoto(r)}></div>
+        <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · rinde ${porcionesDe(r)} porciones</small></a><button class="x" data-sacar="${r.id}" aria-label="Quitar">×</button></div>`).join("");
+    app.innerHTML = cabecera("Mi semana", "Desayunos sin repetir y comida lista en el congelador") + `
+      <h2 class="sec-tit">☀️ Desayunos</h2>
       <div class="botonera"><button class="btn prim" id="armar">🎲 Armar mi semana automáticamente</button></div>
       <div class="personas"><span>¿Para cuántas personas?</span><span class="porciones"><button id="pmenos">−</button><b>${estado.personas}</b><button id="pmas">+</button></span></div>
       ${dias}
-      <div class="botonera"><a class="btn" href="#/compras">🛒 Ver la lista de compras de la semana</a></div>`;
+      <h2 class="sec-tit">❄️ Mi tanda: almuerzos y cenas</h2>
+      <p class="intro" style="margin-top:6px">Cocina estas recetas el mismo día, repártelas en recipientes y congélalas: tendrás almuerzos y cenas listos para toda la semana.</p>
+      ${tanda || '<p class="tanda-vacia">Todavía no elegiste recetas para tu tanda.<br>Arma una automáticamente o toca «❄️ A mi tanda» en cualquier comida.</p>'}
+      <div class="botonera" style="grid-template-columns:1fr 1fr"><button class="btn" id="armar-tanda">🎲 Armar mi tanda</button><a class="btn" href="#/comidas">🍲 Ver comidas</a></div>
+      <div class="botonera"><a class="btn prim" href="#/compras">🛒 Ver la lista de compras de la semana</a></div>`;
     $("#armar").onclick = () => { armarSemana(); vistaSemana(); };
+    $("#armar-tanda").onclick = () => { armarTanda(); vistaSemana(); };
+    app.querySelectorAll("[data-sacar]").forEach(b => b.onclick = () => { alternar(estado.tanda, b.dataset.sacar); guardar(); vistaSemana(); });
     $("#pmenos").onclick = () => { estado.personas = Math.max(1, estado.personas - 1); guardar(); vistaSemana(); };
     $("#pmas").onclick = () => { estado.personas = Math.min(12, estado.personas + 1); guardar(); vistaSemana(); };
     app.querySelectorAll("[data-quitar]").forEach(b => b.onclick = () => { delete estado.semana[b.dataset.quitar]; guardar(); vistaSemana(); });
@@ -479,9 +596,11 @@ img { display: block; max-width: 100%; }
   // ── Lista de compras: suma los ingredientes de la semana ────────────
   function listaCompras() {
     const suma = {};
-    Object.values(estado.semana).forEach(id => {
+    // Desayunos: escalados a las personas. Tanda: con las porciones que elegiste en la receta.
+    const recetas = Object.values(estado.semana).map(id => [id, null]).concat(estado.tanda.map(id => [id, "tanda"]));
+    recetas.forEach(([id, tanda]) => {
       const r = POR_ID[id]; if (!r) return;
-      const factor = estado.personas / r.porciones;
+      const factor = tanda ? porcionesDe(r) / r.porciones : estado.personas / r.porciones;
       r.ing.forEach(([cant, unidad, item]) => {
         // Las cucharaditas se suman como cucharadas (3 cdta = 1 cda) para no repetir el ingrediente.
         if (unidad === "cdta" && cant !== null) { cant = cant / 3; unidad = "cda"; }
@@ -514,8 +633,99 @@ img { display: block; max-width: 100%; }
 
   function vistaFavoritos() {
     const favs = estado.favs.map(id => POR_ID[id]).filter(Boolean);
-    app.innerHTML = cabecera("Favoritos", "Los desayunos que quieres repetir") +
-      `<div class="lista">${favs.map(tarjeta).join("") || '<p class="vacio">Todavía no tienes favoritos.<br>Toca ☆ en cualquier receta para guardarla aquí.</p>'}</div>`;
+    const grupos = [["Desayunos", r => !r.col], ["Almuerzos y cenas", r => r.col === "comida"], ["De tus bonos", r => r.col && r.col !== "comida"]]
+      .map(([t, f]) => { const l = favs.filter(f); return l.length ? `<h2 class="sec-tit">${t}</h2><div class="lista">${l.map(tarjeta).join("")}</div>` : ""; }).join("");
+    app.innerHTML = cabecera("Favoritos", "Las recetas que quieres repetir", "#/") +
+      (grupos || '<p class="vacio">Todavía no tienes favoritos.<br>Toca ☆ en cualquier receta para guardarla aquí.</p>');
+  }
+
+  // ════════════════════════════════════════════════════════════════════
+  //  Bonos
+  // ════════════════════════════════════════════════════════════════════
+  function vistaBonos() {
+    const bono = (ruta, img, et, titulo, txt) => `<a class="bono" href="${ruta}"><img src="imagenes/${img}.webp" alt="" loading="lazy">
+      <div class="tx"><small>${et}</small><b>${titulo}</b><p>${txt}</p><span class="abrir">Abrir ›</span></div></a>`;
+    app.innerHTML = cabecera("Tus bonos", "Todo esto viene incluido en tu compra") +
+      bono("#/bono/plan7", "bono1", "BONO 1", "Plan de los primeros 7 días", "Una semana de desayunos ya armada, de lunes a domingo, con su lista de compras.") +
+      bono("#/bono/loncheras", "bono2", "BONO 2", "Loncheras para niños", `${coleccion("lonchera").length} loncheras sin pan que los niños sí se comen, fáciles de dejar listas la noche anterior.`) +
+      bono("#/bono/batidos", "bono3", "BONO 3", `${coleccion("batido").length} batidos y jugos`, "Para las mañanas en que no hay tiempo ni de sentarse. Listos en menos de 5 minutos.") +
+      bono("#/bono/porciones", "bono4", "BONO 4", "Guía de porciones", "Cuánto servir y cómo combinar cada desayuno, sin contar calorías ni pesar nada. Lista para imprimir.") +
+      bono("#/bono/meriendas", "bono-secreto", 'BONO SECRETO <span class="libre">🔓 DESBLOQUEADO</span>', "Meriendas sin pan", `${coleccion("merienda").length} meriendas para la tarde, dulces y saladas, en menos de 10 minutos. Para que el pan tampoco vuelva a media tarde.`) +
+      `<div class="bono"><img src="imagenes/actualizaciones.webp" alt="" loading="lazy"><div class="tx"><small>DE POR VIDA</small><b>Recetas nuevas cada mes</b><p>Aparecen solas en tu app el día que se publican, sin pagar nada más.</p></div></div>`;
+  }
+
+  function vistaPlan7() {
+    const dias = PLAN7.map((id, n) => {
+      const r = POR_ID[id]; if (!r) return "";
+      return `<div class="dia"><span class="d">${DIAS[n].slice(0, 3)}</span><div class="foto" ${fondoFoto(r)}></div>
+        <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${r.min} min</small></a></div>`;
+    }).join("");
+    app.innerHTML = cabecera("Plan de 7 días", "Bono 1 · Empieza mañana sin pensar nada", "#/bonos") + `
+      <div class="intro">Una semana ya armada para empezar: mitad dulce y mitad salada, con desayunos rápidos entre semana y los más especiales el fin de semana. <b>Úsala en Mi semana</b> y la app te arma la lista de compras.</div>
+      <h2 class="sec-tit">Tu primera semana</h2>${dias}
+      <div class="botonera"><button class="btn prim" id="usar">📅 Usar este plan y ver la lista de compras</button></div>`;
+    $("#usar").onclick = () => {
+      const ocupada = Object.keys(estado.semana).length;
+      if (ocupada && !confirm("Esto reemplaza los desayunos que ya tenías en Mi semana. ¿Seguir?")) return;
+      estado.semana = Object.fromEntries(PLAN7.map((id, n) => [n, id])); estado.compradas = {};
+      guardar(); avisar("Plan cargado en Mi semana"); location.hash = "#/compras";
+    };
+  }
+
+  const INTROS = {
+    loncheras: ["Loncheras para niños", "Bono 2 · Adiós al pan en la lonchera", `<b>Cómo armar una lonchera que vuelve vacía:</b><ul>
+      <li>Deja lista la base la noche anterior: cada receta te dice qué adelantar.</li>
+      <li>Una proteína + una fruta o verdura + algo divertido de comer con la mano.</li>
+      <li>Si lleva huevo, yogur o queso, ponle una bolsita de hielo.</li>
+      <li>Porciones pequeñas y colores: los niños comen primero con los ojos.</li></ul>`],
+    batidos: ["Batidos y jugos", "Bono 3 · Desayunar distinto, incluso cuando vas tarde", `<b>Para que el batido te llene hasta el almuerzo:</b> que lleve fruta + algo que sostenga (avena, yogur, leche, chía o mantequilla de maní). Lava y corta la fruta el fin de semana y congélala en bolsitas por porción: en la mañana solo licúas.`],
+    meriendas: ["Meriendas sin pan", "Bono secreto · Para la tarde, sin volver al pan", `🔓 <b>Desbloqueaste el bono secreto.</b> La media tarde es cuando más se antoja el pan con café. Aquí tienes meriendas dulces y saladas, listas en menos de 10 minutos, para ese momento.`],
+  };
+  const COL_DE = { loncheras: "lonchera", batidos: "batido", meriendas: "merienda" };
+  function vistaColeccion(nombre) {
+    const [titulo, sub, intro] = INTROS[nombre];
+    app.innerHTML = cabecera(titulo, sub, "#/bonos") + `<div class="intro">${intro}</div>
+      <div class="lista">${coleccion(COL_DE[nombre]).map(tarjeta).join("")}</div>`;
+  }
+
+  // Bono 4. Método de la mano y el plato en 4 partes (el mismo de la imagen del bono).
+  function vistaPorciones() {
+    app.innerHTML = cabecera("Guía de porciones", "Bono 4 · Tu desayuno, a la medida de tu mano", "#/bonos") + `<div class="guia">
+      <div class="botonera noimprimir" style="padding:8px 0 0"><button class="btn prim" id="imprimir">🖨️ Imprimir o guardar en PDF</button></div>
+      <h2>Arma tu plato en 4 partes</h2>
+      <p>No necesitas báscula ni contar calorías: <b>tu propia mano es la medida</b>. Como la mano de cada persona va con su tamaño, la misma regla sirve para adultos y para niños.</p>
+      <div class="plato">
+        <div style="--c:#2E86C1"><b>🥚 Proteína</b><span>Te deja satisfecho por más tiempo.</span><em>La palma de tu mano</em></div>
+        <div style="--c:#FFD25A"><b>🍓 Fruta</b><span>Dulzor natural y color.</span><em>Un puño</em></div>
+        <div style="--c:#A8D18D"><b>🥬 Verdura o fibra</b><span>Avena, verduras, semillas.</span><em>Un puño o una mano abierta de verdura</em></div>
+        <div style="--c:#E8890C"><b>🥑 Grasa buena</b><span>Sabor y saciedad.</span><em>Tu dedo pulgar</em></div>
+      </div>
+      <h2>¿Cuánto es cada medida?</h2>
+      <table class="tabla"><tr><th>Medida</th><th>Ejemplos (una porción de adulto)</th></tr>
+        <tr><td><b>Palma</b> · proteína</td><td>2 huevos · ¾ taza de yogur natural o griego · 1 rebanada gruesa de queso fresco · ½ lata de atún · 1 vaso de leche</td></tr>
+        <tr><td><b>Puño</b> · fruta</td><td>1 plátano pequeño · 1 manzana · 1 taza de fresas, papaya o mango picado</td></tr>
+        <tr><td><b>Puño</b> · fibra</td><td>½ taza de avena cruda · 1 taza de avena o quinoa cocida · 1 plátano maduro para cocinar pequeño · 1 papa mediana</td></tr>
+        <tr><td><b>Mano abierta</b> · verdura</td><td>1 taza de espinaca, tomate, champiñones, pimiento o calabacín</td></tr>
+        <tr><td><b>Pulgar</b> · grasa buena</td><td>1 cda de mantequilla de maní · ¼ de aguacate · 1 cda de semillas o nueces · 1 cdta de aceite</td></tr>
+      </table>
+      <h2>Adultos y niños</h2>
+      <ul><li><b>Adultos:</b> 1 o 2 palmas de proteína, 1 puño de fibra, 1 puño de fruta o verdura y 1 pulgar de grasa buena.</li>
+        <li><b>Niños:</b> la misma fórmula, medida con <b>su</b> mano. Por eso sus porciones son más pequeñas sin que tengas que calcular nada.</li>
+        <li>Si a media mañana tienes hambre muy pronto, prueba con más proteína o verdura la próxima vez.</li></ul>
+      <h2>La fórmula para combinar</h2>
+      <p><b>1 proteína + 1 fibra + 1 fruta o verdura + 1 grasa buena.</b> Así se ve con desayunos de tu app:</p>
+      <table class="tabla"><tr><th>Desayuno</th><th>Cómo cumple la fórmula</th></tr>
+        <tr><td>Huevos pericos</td><td>Huevo (proteína) + tomate y cebolla (verdura). Súmale una fruta y ¼ de aguacate.</td></tr>
+        <tr><td>Avena con plátano</td><td>Avena (fibra) + plátano (fruta) + nueces (grasa). Prepárala con leche o súmale un yogur (proteína).</td></tr>
+        <tr><td>Parfait de mango</td><td>Yogur (proteína) + mango (fruta) + granola o chía (fibra y grasa buena).</td></tr></table>
+      <h2>Cuando improvisas</h2>
+      <ol><li><b>Sin tiempo:</b> yogur + fruta + 1 cda de semillas. Listo en 1 minuto.</li>
+        <li><b>Solo hay huevos:</b> 2 huevos revueltos con la verdura que tengas + una fruta.</li>
+        <li><b>Antojo de algo dulce:</b> avena con cacao y plátano, con leche o yogur para la proteína.</li>
+        <li><b>Para llevar:</b> un batido de fruta + avena + leche o yogur.</li></ol>
+      <p class="aclara">Guía práctica de orientación general para personas sanas. No reemplaza la consulta con un profesional de la salud, sobre todo si tienes diabetes, alguna enfermedad, alergias o estás en embarazo.</p>
+    </div>`;
+    $("#imprimir").onclick = () => window.print();
   }
 
   // ════════════════════════════════════════════════════════════════════
@@ -526,12 +736,19 @@ img { display: block; max-width: 100%; }
     const [, ruta, a, b] = (location.hash || "#/").split("/");
     if (ruta !== "cocina") { clearInterval(intervalo); soltarPantalla(); }
     $("#navbar").style.display = ruta === "cocina" ? "none" : "";
-    document.querySelectorAll(".navbar a").forEach(l => l.classList.toggle("on", l.dataset.ruta === (ruta || "inicio")));
+    const r = ruta === "receta" && POR_ID[a];
+    const activa = ruta === "bono" ? "bonos" : ruta === "favoritos" ? "inicio" : r ? volverDe(r).split("/")[1] || "inicio" : ruta || "inicio";
+    document.querySelectorAll(".navbar a").forEach(l => l.classList.toggle("on", l.dataset.ruta === (activa === "bono" ? "bonos" : activa)));
     if (ruta === "receta") vistaReceta(a);
     else if (ruta === "cocina") vistaCocina(a, b);
     else if (ruta === "semana") vistaSemana();
     else if (ruta === "compras") vistaCompras();
     else if (ruta === "favoritos") vistaFavoritos();
+    else if (ruta === "comidas") vistaComidas();
+    else if (ruta === "bonos") vistaBonos();
+    else if (ruta === "bono" && a === "plan7") vistaPlan7();
+    else if (ruta === "bono" && a === "porciones") vistaPorciones();
+    else if (ruta === "bono" && INTROS[a]) vistaColeccion(a);
     else vistaInicio();
     if (ruta !== "cocina") window.scrollTo(0, 0);
   }
