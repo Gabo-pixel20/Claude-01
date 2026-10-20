@@ -8,7 +8,7 @@
 <meta name="description" content="Adiós Pan: la app con 80 desayunos sin pan, listos en menos de 10 minutos. Botón Sorpréndeme, plan semanal y lista de compras. Pago único y 7 días de garantía.">
 <link rel="preload" href="fuentes/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fuentes/poppins-500.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="imagenes/hero.webp" fetchpriority="high">
+<link rel="preload" as="image" href="imagenes/hero.webp" imagesrcset="imagenes/hero-720.webp 720w, imagenes/hero.webp 1024w" imagesizes="(max-width: 560px) 55vw, 1024px" fetchpriority="high">
 <style>
 /* ══════════════════════════════════════════════════════════════════
    ADIÓS PAN — landing sobre la estructura validada de Dolce 365.
@@ -294,7 +294,7 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
     <p class="insignia">✦ Para tu desayuno de cada mañana</p>
     <h1 class="hero-titulo">¿Pan otra vez? <span class="manuscrita">Adiós</span> a desayunar lo mismo todos los días. <span class="emocion">80 desayunos sin pan, listos en menos de 10 minutos.</span></h1>
     <p class="hero-sub">Dulces, salados, para llevar o de fin de semana: abres la app, eliges y desayunas algo distinto cada mañana. <strong>Ni repites… ni te aburres.</strong></p>
-    <figure class="img" style="--ar:1024/683"><img src="imagenes/hero.webp" width="1024" height="683" style="max-width:1024px" alt="Seis desayunos sin pan, coloridos, sobre la mesa de la cocina" fetchpriority="high" decoding="async"><figcaption>HERO · DESAYUNOS</figcaption></figure>
+    <figure class="img" style="--ar:1024/683"><img src="imagenes/hero.webp" srcset="imagenes/hero-720.webp 720w, imagenes/hero.webp 1024w" sizes="(max-width: 560px) 55vw, 1024px" width="1024" height="683" style="max-width:1024px" alt="Seis desayunos sin pan, coloridos, sobre la mesa de la cocina" fetchpriority="high" decoding="async"><figcaption>HERO · DESAYUNOS</figcaption></figure>
   </div>
   <div class="onda-abajo" aria-hidden="true"><svg viewBox="0 0 1280 140" preserveAspectRatio="none"><path fill="#FBF6EA" d="M320 28c320 0 320 84 640 84 160 0 240-21 320-42v70H0V70c80-21 160-42 320-42z"/></svg></div>
 </section>
@@ -404,7 +404,7 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
     <p class="texto">✅ <strong>Fácil de usar:</strong> así funciona por dentro. Grabado en la app real, no es una maqueta.</p>
     <div class="tour">
       <div class="video-vertical">
-        <video id="video-tour" controls preload="none" playsinline poster="video/poster-app.jpg">
+        <video id="video-tour" controls preload="none" playsinline data-poster="video/poster-app.jpg">
           <source src="video/recorrido-app.mp4" type="video/mp4">
           <source src="video/recorrido-app.webm" type="video/webm">
         </video>
@@ -820,6 +820,15 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
   })();
 
   const video = $("video-tour");
+  // La portada del video se descarga solo cuando el visitante se acerca a él,
+  // para no competir con la imagen principal en conexiones lentas.
+  if (video) {
+    const ponerPortada = () => { if (!video.poster) video.poster = video.dataset.poster; };
+    if ("IntersectionObserver" in window) {
+      const obs = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { ponerPortada(); obs.disconnect(); } }, { rootMargin: "800px 0px" });
+      obs.observe(video);
+    } else ponerPortada();
+  }
 
   // ── Video por dentro ──────────────────────────────────────────────
   const btnTour = $("btn-play-tour");
