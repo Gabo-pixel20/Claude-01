@@ -201,7 +201,13 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
   .contenedor { padding: 0; max-width: none; }
   .cab { background: #fff; color: var(--verde); padding: 0 0 6px; border-bottom: 3px solid var(--verde); }
   .cab .cur { color: var(--verde); }
-  .guia { padding: 0; font-size: 12.5px; }
+  .guia { padding: 0; font-size: 11px; line-height: 1.4; }
+  .guia h2 { font-size: 14px; margin: 10px 0 5px; }
+  .guia li { margin: 1px 0; }
+  .tabla { font-size: 10.5px; }
+  .tabla th, .tabla td { padding: 4px 8px; }
+  .plato { margin: 6px 0; gap: 6px; }
+  .plato div { padding: 8px; }
   .plato { grid-template-columns: repeat(4, 1fr); }
   .plato div, .tabla { border: 1px solid var(--borde); }
   .guia h2 { break-after: avoid; }
@@ -317,7 +323,7 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
     return `<a class="tarjeta" href="#/receta/${r.id}">
       <div class="foto" ${fondoFoto(r)}></div>
       <div class="tx"><b>${esc(r.nombre)}</b>
-        <div class="meta"><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span><span>⏱ ${r.min} min</span>${fav ? "<span>★</span>" : ""}${hecho ? '<span class="marca">✓ Hecho</span>' : ""}</div></div></a>`;
+        <div class="meta"><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span><span>⏱ ${duracion(r.min)}</span>${fav ? "<span>★</span>" : ""}${hecho ? '<span class="marca">✓ Hecho</span>' : ""}</div></div></a>`;
   }
 
   // ── Acceso: inicio de sesión con el correo de la compra ─────────────
@@ -432,7 +438,7 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
     const giro = setInterval(() => {
       const r = vueltas++ < 7 ? base[Math.floor(Math.random() * base.length)] : elegida;
       g.querySelector(".foto").style.backgroundImage = `url('fotos/${foto(r)}.webp')`;
-      g.querySelector(".tx").innerHTML = `<b>${esc(r.nombre)}</b><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span> <span style="font-size:13px;color:var(--gris)">⏱ ${r.min} min</span>`;
+      g.querySelector(".tx").innerHTML = `<b>${esc(r.nombre)}</b><span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span> <span style="font-size:13px;color:var(--gris)">⏱ ${duracion(r.min)}</span>`;
       if (vueltas > 7) { clearInterval(giro); g.classList.remove("girando"); vibrar([20, 40, 20]); }
     }, 110);
     fondo.onclick = e => { if (e.target === fondo) cerrar(); };
@@ -456,7 +462,7 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
       <div class="det">
         <span class="tipo t-${r.tipo}">${TIPOS[r.tipo]}</span>
         <h1>${esc(r.nombre)}</h1>
-        <div class="meta"><span>⏱ ${r.min} minutos</span><span>·</span><span>${r.pasos.length} pasos</span></div>
+        <div class="meta"><span>⏱ ${duracion(r.min, true)}</span><span>·</span><span>${r.pasos.length} pasos</span></div>
         <div class="acciones">
           <button class="btn prim" id="cocinar">▶ Modo cocina</button>
           <button class="btn ${fav ? "activo" : ""}" id="fav" ${semana ? "" : 'style="grid-column:1/-1"'}>${fav ? "★ En favoritos" : "☆ Favorito"}</button>
@@ -478,6 +484,12 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
     $("#hecho").onclick = () => { alternar(estado.hechos, id); guardar(); vistaReceta(id); };
     if ($("#semana")) $("#semana").onclick = () => elegirDia(id);
     if ($("#tanda")) $("#tanda").onclick = () => { alternar(estado.tanda, id); guardar(); avisar(estado.tanda.includes(id) ? "Agregada a tu tanda de la semana" : "Quitada de tu tanda"); vistaReceta(id); };
+  }
+  // 45 → "45 min"; 270 → "4 h 30 min".
+  function duracion(m, largo) {
+    if (m < 60) return `${m} ${largo ? "minutos" : "min"}`;
+    const h = Math.floor(m / 60), r = m % 60;
+    return `${h} h${r ? ` ${r} min` : ""}`;
   }
   const alternar = (arr, v) => { const i = arr.indexOf(v); i < 0 ? arr.push(v) : arr.splice(i, 1); };
   const reloj = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
@@ -570,7 +582,7 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
     const dias = DIAS.map((d, n) => {
       const r = estado.semana[n] && POR_ID[estado.semana[n]];
       return r ? `<div class="dia"><span class="d">${d.slice(0, 3)}</span><div class="foto" ${fondoFoto(r)}></div>
-          <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${r.min} min</small></a><button class="x" data-quitar="${n}" aria-label="Quitar">×</button></div>`
+          <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${duracion(r.min)}</small></a><button class="x" data-quitar="${n}" aria-label="Quitar">×</button></div>`
         : `<div class="dia vacia"><span class="d">${d.slice(0, 3)}</span><div class="foto foto-falta"></div><span class="nom">Sin elegir · tócalo en una receta o arma la semana</span></div>`;
     }).join("");
     const tanda = estado.tanda.map(id => POR_ID[id]).filter(Boolean).map(r => `<div class="dia"><span class="d">❄️</span><div class="foto" ${fondoFoto(r)}></div>
@@ -610,6 +622,15 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
         suma[k].recetas.add(r.nombre);
       });
     });
+    // Si un ingrediente aparece en tazas y también en cucharadas o ml, todo se suma en tazas.
+    const A_TAZA = { cda: 1 / 16, ml: 1 / 240 };
+    Object.keys(suma).forEach(k => {
+      const v = suma[k], t = suma[v.item + "|taza"];
+      if (A_TAZA[v.unidad] && t && v.cant !== null) { t.cant += v.cant * A_TAZA[v.unidad]; v.recetas.forEach(n => t.recetas.add(n)); delete suma[k]; }
+    });
+    Object.keys(suma).forEach(k => { if (/^agua\b/.test(suma[k].item)) delete suma[k]; });
+    // Menos de una cucharada se muestra en cucharaditas (¼ cda → ¾ cdta).
+    Object.values(suma).forEach(v => { if (v.unidad === "cda" && v.cant !== null && v.cant < 1) { v.cant *= 3; v.unidad = "cdta"; } });
     return Object.entries(suma).sort((a, b) => a[1].item.localeCompare(b[1].item, "es"));
   }
 
@@ -658,7 +679,7 @@ details.intro summary { font-weight: 700; color: var(--verde); cursor: pointer; 
     const dias = PLAN7.map((id, n) => {
       const r = POR_ID[id]; if (!r) return "";
       return `<div class="dia"><span class="d">${DIAS[n].slice(0, 3)}</span><div class="foto" ${fondoFoto(r)}></div>
-        <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${r.min} min</small></a></div>`;
+        <a class="nom" href="#/receta/${r.id}">${esc(r.nombre)}<small>${TIPOS[r.tipo]} · ${duracion(r.min)}</small></a></div>`;
     }).join("");
     app.innerHTML = cabecera("Plan de 7 días", "Bono 1 · Empieza mañana sin pensar nada", "#/bonos") + `
       <div class="intro">Una semana ya armada para empezar: mitad dulce y mitad salada, con desayunos rápidos entre semana y los más especiales el fin de semana. <b>Úsala en Mi semana</b> y la app te arma la lista de compras.</div>

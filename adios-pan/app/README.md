@@ -22,6 +22,21 @@ Hotmart puede llenar esa base de datos con sus webhooks de compra aprobada y de 
 ## Planes (fase de test)
 
 Por ahora **todos los compradores acceden a todo**, compren el plan de $6.99 o el de $9.99.
-El contenido del Plan Completo (almuerzos y cenas) irá dentro de esta misma app.
+El Plan Completo (150 almuerzos y cenas para congelar) y los bonos están dentro de esta misma app.
 Si el producto se valida, la base de datos de accesos distinguirá los planes
 (por ejemplo, que `API_VERIFICACION` responda también el plan del comprador).
+
+## Contenido
+
+| Sección | Dónde | Fuente |
+|---|---|---|
+| 80 desayunos | pestaña Desayunos | `recetas.py` → `recetas.js` |
+| 150 almuerzos y cenas para congelar (Plan Completo) | pestaña Comidas y «Mi tanda» en Mi semana | `extras/*.py` → `extras.py` → `extras.js` |
+| Bono 1 · Plan de 7 días | Bonos | lista `PLAN7` en `index.html` (el mismo plan de la imagen del bono) |
+| Bono 2 · 20 loncheras para niños | Bonos | `extras/bonos.py` |
+| Bono 3 · 15 batidos y jugos | Bonos | `extras/bonos.py` |
+| Bono 4 · Guía de porciones (imprimible) | Bonos | `vistaPorciones()` en `index.html` |
+| Bono secreto · 20 meriendas sin pan | Bonos | `extras/bonos.py` |
+
+Para cambiar recetas: edita el `.py` y vuelve a generar con `python3 recetas.py` o `python3 extras.py`.
+Las fotos están en `fotos/<id>.webp` (640 px).

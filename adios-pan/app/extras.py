@@ -23,6 +23,9 @@ for ruta in sorted(glob.glob(f'{AQUI}/extras/*.py')):
 
 desayunos = open(f'{AQUI}/recetas.js', encoding='utf-8').read()
 ids_desayunos = set(r['id'] for r in json.loads(desayunos[desayunos.index('['):desayunos.rindex(']') + 1]))
+# Comidas en el orden de sus categorías; los bonos al final.
+ORDEN = COMIDAS + ['lonchera', 'batido', 'merienda']
+EXTRAS.sort(key=lambda r: ORDEN.index(r['tipo']))
 ids = [r['id'] for r in EXTRAS]
 assert len(ids) == len(set(ids)), 'ids repetidos: ' + str({i for i in ids if ids.count(i) > 1})
 assert not ids_desayunos & set(ids), 'choca con un desayuno: ' + str(ids_desayunos & set(ids))
