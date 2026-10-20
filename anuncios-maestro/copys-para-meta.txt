@@ -1,6 +1,5 @@
 DOLCE 365 · 3 ANUNCIOS PARA META (formato 4:5, 1080×1350)
-Página de destino: la lander «Maestro» (maestro.html)
-⚠️ En las URLs usé https://maestro.recursoweb.lat como dominio. Si la subiste con otro, cambia solo esa parte.
+Página de destino: https://dirige.recursoweb.lat
 Sin precios en los textos. Botón de todos: «Más información».
 Cada anuncio lleva su propio "src" para ver en Hotmart de cuál vino cada venta.
 
@@ -11,7 +10,7 @@ ANUNCIO A · TODO A LA VEZ  (archivo: anuncio-A-todo-a-la-vez.png)
 ══════════════════════════════════════════════════════════════
 
 URL:
-https://maestro.recursoweb.lat/?src=mae-a-todo&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=a-todo
+https://dirige.recursoweb.lat/?src=mae-a-todo&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=a-todo
 
 TEXTO PRINCIPAL:
 Pianista. Metrónomo. Director de orquesta. Corrector de digitaciones. Y, de vez en cuando, policía del "¡shhh, escuchen!". 🐙
@@ -53,7 +52,7 @@ ANUNCIO B · ¿CUÁNDO ESCUCHASTE?  (archivo: anuncio-B-escuchaste.png)
 ══════════════════════════════════════════════════════════════
 
 URL:
-https://maestro.recursoweb.lat/?src=mae-b-escuchar&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=b-escuchar
+https://dirige.recursoweb.lat/?src=mae-b-escuchar&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=b-escuchar
 
 TEXTO PRINCIPAL:
 Pregunta incómoda para maestros de música:
@@ -96,7 +95,7 @@ ANUNCIO C · DOMINGO, 11:47 P.M.  (archivo: anuncio-C-domingo-1147.png)
 ══════════════════════════════════════════════════════════════
 
 URL:
-https://maestro.recursoweb.lat/?src=mae-c-domingo&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=c-domingo
+https://dirige.recursoweb.lat/?src=mae-c-domingo&utm_source=facebook&utm_medium=paid&utm_campaign=maestro&utm_content=c-domingo
 
 TEXTO PRINCIPAL:
 Domingo, 11:47 p.m. 🕚
