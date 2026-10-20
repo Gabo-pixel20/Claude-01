@@ -2,9 +2,9 @@
 // - La app y las recetas (HTML, JS, manifest): primero la red, para que las
 //   recetas nuevas de cada mes lleguen solas; sin conexión, la copia guardada.
 // - Fotos, íconos y fuentes: primero la copia guardada (no cambian).
-const VERSION = "adiospan-v1";
+const VERSION = "adiospan-v2";
 const BASE = ["./", "index.html", "recetas.js", "manifest.webmanifest", "icono-192.png", "icono-512.png",
-  "../fuentes/poppins-400.woff2", "../fuentes/poppins-500.woff2", "../fuentes/poppins-700.woff2", "../fuentes/cookie-400.woff2"];
+  "fuentes/poppins-400.woff2", "fuentes/poppins-500.woff2", "fuentes/poppins-700.woff2", "fuentes/cookie-400.woff2"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(BASE)).then(() => self.skipWaiting()));
