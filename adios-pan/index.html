@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<title>Adiós Pan — 80 desayunos sin pan, listos en menos de 10 minutos</title>
-<meta name="description" content="Adiós Pan: la app con 80 desayunos sin pan, listos en menos de 10 minutos. Botón Sorpréndeme, plan semanal y lista de compras. Pago único y 7 días de garantía.">
+<title>Adiós Pan — ¿Qué desayunar en vez de pan? La app lo decide por ti</title>
+<meta name="description" content="Adiós Pan: la app que decide qué desayunar en vez de pan. 80 desayunos ligeros que llenan, listos en menos de 10 minutos. Botón Sorpréndeme, plan semanal y lista de compras. Pago único y 7 días de garantía.">
 <link rel="preload" href="fuentes/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fuentes/poppins-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="imagenes/hero.webp" imagesrcset="imagenes/hero-720.webp 720w, imagenes/hero.webp 1024w" imagesizes="(max-width: 560px) 55vw, 1024px" fetchpriority="high">
@@ -291,10 +291,10 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
      el pan). Estructura validada de Dolce 365; copy decidido con Gabriel. -->
 <section class="sec hero" id="hero">
   <div class="col">
-    <p class="insignia">✦ Para tu desayuno de cada mañana</p>
-    <h1 class="hero-titulo">¿Pan otra vez? <span class="manuscrita">Adiós</span> a desayunar lo mismo todos los días. <span class="emocion">80 desayunos sin pan, listos en menos de 10 minutos.</span></h1>
-    <p class="hero-sub">Dulces, salados, para llevar o de fin de semana: abres la app, eliges y desayunas algo distinto cada mañana. <strong>Ni repites… ni te aburres.</strong></p>
-    <figure class="img" style="--ar:1024/683"><img src="imagenes/hero.webp" srcset="imagenes/hero-720.webp 720w, imagenes/hero.webp 1024w" sizes="(max-width: 560px) 55vw, 1024px" width="1024" height="683" style="max-width:1024px" alt="Seis desayunos sin pan, coloridos, sobre la mesa de la cocina" fetchpriority="high" decoding="async"><figcaption>HERO · DESAYUNOS</figcaption></figure>
+    <p class="insignia">✦ La app que decide tu desayuno</p>
+    <h1 class="hero-titulo">¿Qué desayunar en vez de pan? <span class="manuscrita">Deja</span> que la app lo decida por ti. <span class="emocion">80 desayunos ligeros, listos en menos de 10 minutos.</span></h1>
+    <p class="hero-sub">Tocas «Sorpréndeme» y ya sabes qué desayunar: opciones que llenan, sin esa pesadez ni la barriga inflamada a media mañana. <strong>Sin pensar, sin pan y sin pasar hambre.</strong></p>
+    <figure class="img" style="--ar:1024/683"><img src="imagenes/hero.webp" srcset="imagenes/hero-720.webp 720w, imagenes/hero.webp 1024w" sizes="(max-width: 560px) 55vw, 1024px" width="1024" height="683" style="max-width:1024px" alt="La app Adiós Pan eligiendo el desayuno del día en el celular, junto a un omelette con aguacate y fruta" fetchpriority="high" decoding="async"><figcaption>HERO · DESAYUNOS</figcaption></figure>
   </div>
   <div class="onda-abajo" aria-hidden="true"><svg viewBox="0 0 1280 140" preserveAspectRatio="none"><path fill="#FBF6EA" d="M320 28c320 0 320 84 640 84 160 0 240-21 320-42v70H0V70c80-21 160-42 320-42z"/></svg></div>
 </section>
@@ -304,9 +304,9 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
 
     <!-- Cifras (lander vieja): cuatro números que no envejecen. -->
     <div class="cifras">
-      <div class="cifra"><b>80</b><span>desayunos sin pan para no repetir</span></div>
+      <div class="cifra"><b>80</b><span>desayunos sin pan, ligeros y que llenan</span></div>
       <div class="cifra"><b>≤10</b><span>minutos para tenerlo listo</span></div>
-      <div class="cifra"><b>5</b><span>tipos: dulce, salado, para llevar…</span></div>
+      <div class="cifra"><b>1</b><span>toque y la app elige por ti</span></div>
       <div class="cifra"><b>Gratis</b><span>las recetas nuevas de cada mes</span></div>
     </div>
     <div class="linea"></div>
@@ -800,6 +800,32 @@ fbq('track','ViewContent',{content_name:'Adios Pan app desayunos',
       if (typeof fbq === "function") fbq("trackCustom", "CheckoutClick", { button: a.dataset.donde || "", plan });
     });
   });
+
+  // ── Hitos de lectura ──────────────────────────────────────────────
+  // Un evento por punto clave, una sola vez por visita, con el src del anuncio
+  // y los segundos desde que abrió la página: así se ve en qué parte se van.
+  // Numerados para que en el Administrador de eventos salgan en orden.
+  const T0 = Date.now(), SRC = PARAMS_CAMPANA.get("src") || "";
+  const hito = (nombre, el, alSalirArriba) => {
+    if (!el || !("IntersectionObserver" in window)) return;
+    const obs = new IntersectionObserver(es => es.forEach(e => {
+      const listo = alSalirArriba ? (!e.isIntersecting && e.boundingClientRect.top < 0) : e.isIntersecting;
+      if (!listo) return;
+      evento(nombre, { src: SRC, seg: Math.round((Date.now() - T0) / 1000) });
+      obs.disconnect();
+    }), alSalirArriba ? {} : { rootMargin: "0px 0px -35% 0px" });
+    obs.observe(el);
+  };
+  const conTexto = (sel, txt) => [...document.querySelectorAll(sel)].find(el => el.textContent.includes(txt));
+  hito("P1_PasoHero", $("hero"), true);
+  hito("P2_LeyoHistoria", document.querySelector(".revelacion"));
+  hito("P3_Beneficios", conTexto("h2.titulo", "QUÉ VAS A LOGRAR"));
+  hito("P4_VioApp", $("video-tour"));
+  hito("P5_VioPrecio", document.querySelector("p.ancla"));
+  hito("P6_Bonos", document.querySelector(".bono"));
+  hito("P7_Oferta", $("planes"));
+  hito("P8_Garantia", document.querySelector('img[src$="garantia.webp"]'));
+  hito("P9_Cierre", $("cierre"));
 
   // ── Contador ──────────────────────────────────────────────────────
   // Guarda el instante de fin: recargar no lo reinicia. Al llegar a cero se
