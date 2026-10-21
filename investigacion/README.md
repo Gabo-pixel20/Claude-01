@@ -6,3 +6,9 @@
 - Búsquedas US: digital download, instant access, ebook, lifetime access, printable, app, PDF guide, workbook.
 - Criterio: anuncios activos con más días corriendo y anunciantes con más anuncios o versiones simultáneas.
   Es una señal indirecta de rentabilidad, no un dato de ventas.
+
+## Latinoamérica (21 oct 2026)
+
+- `ad-library-latam-2026-10-21.csv`: 341 anuncios activos únicos de 20 búsquedas en México y Colombia.
+  Búsquedas: hotmart, acceso inmediato, descarga inmediata, pago único, acceso de por vida, bonos exclusivos,
+  guía en PDF, plantillas, ebook, curso online. Mismas columnas que el archivo de Brasil y EE. UU.
